@@ -33,9 +33,12 @@
                     {
                         "data": null,
                         "render": function (data, type, row, meta) {
-                            return '<button type="button" class="btn btn-primary btnEditar" data-id="' + row.IdCliente + '"> Editar </button>';
+                            return '<button type="button" class="btn btn-primary btnEditar" data-id="' + row.IdCliente + '"> <i class="fas fa-solid fa-pen"></i> </button>' +
+                            '<button type="button" class="btn btn-danger btnEliminar ml-1" data-id="' + row.IdCliente + '"> <i class="fas fa-solid fa-trash"></i> </button>';
+                            ;
+
                         }
-                    }
+                    },
                 ],
                 buttons: [
                     {
