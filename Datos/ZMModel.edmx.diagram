@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d9bb2f14dc8d41e883fb484fa6aa6346" Name="Diagram1">
+        <EntityTypeShape EntityType="Contexto.Categoria" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Contexto.Cliente" Width="1.5" PointX="0.75" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Contexto.DetalleFacturaCompra" Width="1.5" PointX="5.25" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Contexto.DetalleFacturaVenta" Width="1.5" PointX="8.25" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Contexto.DetallePedidoVenta" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Contexto.FacturaCompra" Width="1.5" PointX="3" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Contexto.FacturaVenta" Width="1.5" PointX="6" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Contexto.Marca" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Contexto.PedidoVenta" Width="1.5" PointX="3" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Contexto.Producto" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Contexto.Proveedor" Width="1.5" PointX="0.75" PointY="13.75" IsExpanded="true" />
+        <AssociationConnector Association="Contexto.FK_Producto_Categoria" ManuallyRouted="false" />
+        <AssociationConnector Association="Contexto.FK_FacturaVenta_Cliente" ManuallyRouted="false" />
+        <AssociationConnector Association="Contexto.FK_PedidoVenta_Cliente" ManuallyRouted="false" />
+        <AssociationConnector Association="Contexto.FK_DetalleFacturaCompra_FacturaCompra" ManuallyRouted="false" />
+        <AssociationConnector Association="Contexto.FK_DetalleFacturaCompra_Producto" ManuallyRouted="false" />
+        <AssociationConnector Association="Contexto.FK_DetalleFacturaVenta_FacturaVenta" ManuallyRouted="false" />
+        <AssociationConnector Association="Contexto.FK_DetalleFacturaVenta_Producto" ManuallyRouted="false" />
+        <AssociationConnector Association="Contexto.FK_DetallePedidoVenta_PedidoVenta" ManuallyRouted="false" />
+        <AssociationConnector Association="Contexto.FK_DetallePedidoVenta_Producto" ManuallyRouted="false" />
+        <AssociationConnector Association="Contexto.FK_FacturaCompra_Proveedor" ManuallyRouted="false" />
+        <AssociationConnector Association="Contexto.FK_Producto_Marca" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
