@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Contexto.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Contexto.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Categoria">
           <Key>
             <PropertyRef Name="IdCategoria" />
@@ -22,6 +22,7 @@
           <Property Name="Cedula" Type="nvarchar" MaxLength="16" />
           <Property Name="Correo" Type="nvarchar" MaxLength="50" />
           <Property Name="Telefono" Type="nvarchar" MaxLength="8" />
+          <Property Name="activo" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="DetalleFacturaCompra">
           <Key>
@@ -313,8 +314,7 @@
             <End Role="Producto" EntitySet="Producto" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Contexto" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -338,6 +338,7 @@
           <Property Name="Telefono" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="FacturaVenta" Relationship="Self.FK_FacturaVenta_Cliente" FromRole="Cliente" ToRole="FacturaVenta" />
           <NavigationProperty Name="PedidoVenta" Relationship="Self.FK_PedidoVenta_Cliente" FromRole="Cliente" ToRole="PedidoVenta" />
+          <Property Name="activo" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="DetalleFacturaCompra">
           <Key>
@@ -665,6 +666,7 @@
           <EntitySetMapping Name="Cliente">
             <EntityTypeMapping TypeName="Contexto.Cliente">
               <MappingFragment StoreEntitySet="Cliente">
+                <ScalarProperty Name="activo" ColumnName="activo" />
                 <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
                 <ScalarProperty Name="Nombres" ColumnName="Nombres" />
                 <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />

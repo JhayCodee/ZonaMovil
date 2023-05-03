@@ -27,6 +27,7 @@ namespace Datos
         public string Cedula { get; set; }
         public string Correo { get; set; }
         public string Telefono { get; set; }
+        public int activo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FacturaVenta> FacturaVenta { get; set; }
