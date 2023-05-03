@@ -128,6 +128,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProductoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1821,6 +1822,7 @@
     <Content Include="Scripts\jquery-easing\jquery.easing.compatibility.js" />
     <Content Include="Scripts\jquery-easing\jquery.easing.js" />
     <Content Include="Scripts\jquery-easing\jquery.easing.min.js" />
+    <Content Include="Scripts\jquery-val\jquey.validate.min.js" />
     <Content Include="Scripts\jquery\jquery.js" />
     <Content Include="Scripts\jquery\jquery.min.js" />
     <Content Include="Scripts\jquery\jquery.slim.js" />
@@ -1831,7 +1833,10 @@
     <Content Include="Scripts\js\demo\datatables-demo.js" />
     <Content Include="Scripts\js\sb-admin-2.js" />
     <Content Include="Scripts\js\sb-admin-2.min.js" />
+    <Content Include="Scripts\swal\swal.js" />
     <Content Include="Scripts\VistasJS\Cliente\Index.js" />
+    <Content Include="Scripts\VistasJS\Cliente\Validaciones.js" />
+    <Content Include="Scripts\VistasJS\Producto\Producto.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -2007,6 +2012,7 @@
     <Content Include="Scripts\fontawesome-free\webfonts\fa-solid-900.woff2" />
     <Content Include="Scripts\jquery\jquery.min.map" />
     <Content Include="Scripts\jquery\jquery.slim.min.map" />
+    <Content Include="Views\Producto\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Logica\Logica.csproj">
