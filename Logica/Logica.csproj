@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Categoria_LN.cs" />
     <Compile Include="Cliente_LN.cs" />
     <Compile Include="Producto_LN.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
