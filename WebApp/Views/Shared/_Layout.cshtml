@@ -19,9 +19,10 @@
     <link href="~/Scripts/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     @*<link href="~/Scripts/datatables/extensiones/css/buttons.dataTables.min.css" rel="stylesheet">*@
 
+    <link href="~/Content/Site.css" rel="stylesheet"/>
 </head>
 
-<body id="page-top">
+<body id="page-top" style="padding-top:0; padding-bottom:0;">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -42,7 +43,7 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="@Url.Action("Index","Home")">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span>
@@ -58,7 +59,7 @@
             </div>
 
             <li class="nav-item">
-                <a class="nav-link" href="@Url.Action("Index","Cliente")">
+                <a class="nav-link" href="@Url.Action("Index","Producto")">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Productos</span>
                 </a>
@@ -67,18 +68,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="@Url.Action("Index","Cliente")">
                     <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Marcas</span>
+                    <span>Clientes</span>
                 </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="@Url.Action("Index","Cliente")">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Categoria</span>
-                </a>
-            </li>
-
-            <!-- Nav Item - Pages Collapse Menu -->
+            </li><!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                    aria-expanded="true" aria-controls="collapseTwo">
@@ -111,10 +103,18 @@
                 </div>
             </li>
 
+
             <li class="nav-item">
                 <a class="nav-link" href="@Url.Action("Index","Cliente")">
                     <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Clientes</span>
+                    <span>Marcas</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("Index","Cliente")">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Categoria</span>
                 </a>
             </li>
 
@@ -197,6 +197,8 @@
 
     <!-- Bootstrap core JavaScript-->
     <script src="~/Scripts/jquery/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    @*<script src="~/Scripts/jquery-val/jquey.validate.min.js"></script>*@
     <script src="~/Scripts/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
@@ -208,6 +210,7 @@
     <script src="~/Scripts/datatables/jquery.dataTables.min.js"></script>
     <script src="~/Scripts/datatables/dataTables.bootstrap4.min.js"></script>
     <script src="~/Scripts/datatables/extensiones/js/dataTables.buttons.min.js"></script>
+    <script src="~/Scripts/swal/swal.js"></script>
 
     <!-- Page level plugins -->
     <!--<script src="vendor/chart.js/Chart.min.js"></script>-->

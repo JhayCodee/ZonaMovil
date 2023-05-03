@@ -82,5 +82,21 @@ namespace WebApp.Controllers
             }
         }
 
+        [HttpPost]
+        public JsonResult EliminarCliente(int id)
+        {
+            string mensaje = string.Empty;
+
+            bool res = clienteLN.EliminarCliente(id, ref mensaje);
+
+            if (res)
+            {
+                return Json(new { success = true, message = "Cliente agregado correctamente" });
+            }
+            else
+            {
+                return Json(new { success = false, message = mensaje });
+            }
+        }
     }
 }

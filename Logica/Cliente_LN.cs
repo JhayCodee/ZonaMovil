@@ -31,8 +31,10 @@ namespace Logica
                         Apellidos = c.Apellidos,
                         Cedula = c.Cedula,
                         Correo = c.Correo,
-                        Telefono = c.Telefono
+                        Telefono = c.Telefono,
+                        activo = c.activo
                     })
+                    .Where(c => c.activo == 1)
                     .ToList();
 
                 return true;
@@ -55,7 +57,8 @@ namespace Logica
                     Apellidos = cliente.Apellidos,
                     Cedula = cliente.Cedula,
                     Correo = cliente.Correo,
-                    Telefono = cliente.Telefono
+                    Telefono = cliente.Telefono,
+                    activo = 1
                 };
                 _db.Cliente.Add(nuevoCliente);
                 _db.SaveChanges();
@@ -94,6 +97,34 @@ namespace Logica
             catch (Exception ex)
             {
                 mensaje = "Error al editar el cliente: " + ex.Message;
+                return false;
+            }
+        }
+
+        // set activo = 0
+        public bool EliminarCliente(int id, ref string mensaje)
+        {
+            try
+            {
+                Cliente clienteExistente = _db.Cliente.FirstOrDefault(c => c.IdCliente == id);
+
+                if (clienteExistente != null)
+                {
+                    clienteExistente.activo = 0;
+                    _db.Entry(clienteExistente).State = EntityState.Modified;
+                    _db.SaveChanges();
+                    return true;
+                }
+                else
+                {
+                    mensaje = "No se encontró el cliente con ID " + id;
+                    return false;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                mensaje = "Error al eliminar el cliente: " + ex.Message;
                 return false;
             }
         }

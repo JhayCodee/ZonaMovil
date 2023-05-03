@@ -17,8 +17,25 @@
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
-input,
+/*input,
 select,
 textarea {
     max-width: 280px;
+}*/
+
+.error, .invalid-feedback {
+    color: red !important;
+    font-size: 14px !important;
+    margin-top: 5px !important;
+    width: 100%;
+}
+
+
+
+input.error {
+    border-color: red;
+}
+
+input.valid {
+    border-color: green;
 }

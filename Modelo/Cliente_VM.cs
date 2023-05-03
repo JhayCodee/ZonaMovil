@@ -14,5 +14,7 @@ namespace Modelo
         public string Cedula { get; set; }
         public string Correo { get; set; }
         public string Telefono { get; set; }
+        public int activo { get; set; }
+
     }
 }
