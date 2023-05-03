@@ -1,4 +1,4 @@
-﻿$(function () {
+$(function () {
 
     var vistaClienteComponente, tablaCliente;
     var modo = "";
@@ -51,94 +51,98 @@
     $('#btnGuardarCliente').click(function (e) {
         e.preventDefault(); // Evita que se envíe el formulario de forma predeterminada
 
-        // Obtener los valores de los campos de entrada del formulario
-        var id = $('#IdCliente').val();
-        var nombre = $('#NombreCliente').val();
-        var apellidos = $('#ApellidoClientes').val();
-        var cedula = $('#CedulaCliente').val();
-        var correo = $('#CorreoCliente').val();
-        var telefono = $('#TelefonoCliente').val();
+        if ($('#FormularioCliente').valid()) {
+            // Obtener los valores de los campos de entrada del formulario
+            var id = $('#IdCliente').val();
+            var nombre = $('#NombreCliente').val();
+            var apellidos = $('#ApellidoClientes').val();
+            var cedula = $('#CedulaCliente').val();
+            var correo = $('#CorreoCliente').val();
+            var telefono = $('#TelefonoCliente').val();
 
-        // Crear un objeto con los datos del formulario
-        var data = {
-            Nombres: nombre,
-            Apellidos: apellidos,
-            Cedula: cedula,
-            Correo: correo,
-            Telefono: telefono
-        };
+            // Crear un objeto con los datos del formulario
+            var data = {
+                Nombres: nombre,
+                Apellidos: apellidos,
+                Cedula: cedula,
+                Correo: correo,
+                Telefono: telefono
+            };
 
-        if (modo === "editar") {
-            data.IdCliente = id;
-        }
+            if (modo === "editar") {
+                data.IdCliente = id;
+            }
 
-        // determinar si se trata de una operación de creación o edición
-        var url = "";
-        if (modo === "editar") {
-            url = vistaClienteComponente.url + '/EditarCliente'; // establecer la URL para la edición
+            // determinar si se trata de una operación de creación o edición
+            var url = "";
+            if (modo === "editar") {
+                url = vistaClienteComponente.url + '/EditarCliente'; // establecer la URL para la edición
 
-            Swal.fire({
-                title: 'Estas seguro?',
-                text: "Este registro se actualizará",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Si, Actualizar!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Realizar solicitud AJAX para actualizar el registro
-                    $.ajax({
-                        type: 'POST',
-                        url: url,
-                        data: data,
-                        success: function (response) {
-                            // Manejar la respuesta del controlador si es necesario
-                            console.log(response);
-                            // Mostrar SweetAlert de éxito y volver a la tabla
-                            Swal.fire(
-                                'Actualizado!',
-                                'Este registro se ha actualizado.',
-                                'success'
-                            ).then(() => {
-                                cargarTablaClientes();
-                                vistaClienteComponente.contenedorTabla.show();
-                                vistaClienteComponente.contenedorFormulario.hide();
-                            });
-                        },
-                        error: function (xhr, status, error) {
-                            // Manejar el error si es necesario
-                            console.log(xhr.responseText);
-                        }
-                    });
-                }
-            })
+                Swal.fire({
+                    title: 'Estas seguro?',
+                    text: "Este registro se actualizará",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Si, Actualizar!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Realizar solicitud AJAX para actualizar el registro
+                        $.ajax({
+                            type: 'POST',
+                            url: url,
+                            data: data,
+                            success: function (response) {
+                                // Manejar la respuesta del controlador si es necesario
+                                console.log(response);
+                                // Mostrar SweetAlert de éxito y volver a la tabla
+                                Swal.fire(
+                                    'Actualizado!',
+                                    'Este registro se ha actualizado.',
+                                    'success'
+                                ).then(() => {
+                                    cargarTablaClientes();
+                                    vistaClienteComponente.contenedorTabla.show();
+                                    vistaClienteComponente.contenedorFormulario.hide();
+                                });
+                            },
+                            error: function (xhr, status, error) {
+                                // Manejar el error si es necesario
+                                console.log(xhr.responseText);
+                            }
+                        });
+                    }
+                })
 
+            } else {
+                url = vistaClienteComponente.url + '/AgregarCliente'; // establecer la URL para la creación
+                $.ajax({
+                    type: 'POST',
+                    url: url,
+                    data: data,
+                    success: function (response) {
+                        // Manejar la respuesta del controlador si es necesario
+                        console.log(response);
+                        // Mostrar SweetAlert de éxito y volver a la tabla
+                        Swal.fire(
+                            'Creado!',
+                            'Este registro se ha creado con éxito.',
+                            'success'
+                        ).then(() => {
+                            cargarTablaClientes();
+                            vistaClienteComponente.contenedorTabla.show();
+                            vistaClienteComponente.contenedorFormulario.hide();
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        // Manejar el error si es necesario
+                        console.log(xhr.responseText);
+                    }
+                });
+            }
         } else {
-            url = vistaClienteComponente.url + '/AgregarCliente'; // establecer la URL para la creación
-            $.ajax({
-                type: 'POST',
-                url: url,
-                data: data,
-                success: function (response) {
-                    // Manejar la respuesta del controlador si es necesario
-                    console.log(response);
-                    // Mostrar SweetAlert de éxito y volver a la tabla
-                    Swal.fire(
-                        'Creado!',
-                        'Este registro se ha creado con éxito.',
-                        'success'
-                    ).then(() => {
-                        cargarTablaClientes();
-                        vistaClienteComponente.contenedorTabla.show();
-                        vistaClienteComponente.contenedorFormulario.hide();
-                    });
-                },
-                error: function (xhr, status, error) {
-                    // Manejar el error si es necesario
-                    console.log(xhr.responseText);
-                }
-            });
+            console.log('Inválido');
         }
     });
 
