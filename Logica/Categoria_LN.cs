@@ -52,7 +52,7 @@ namespace Logica
                 Categoria nuevaCategoria = new Categoria()
                 {
                     Nombre = categoria.Nombre,
-
+                    Activo=true
                 };
                 _db.Categoria.Add(nuevaCategoria);
                 _db.SaveChanges();
