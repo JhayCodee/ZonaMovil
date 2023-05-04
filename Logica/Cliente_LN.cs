@@ -13,6 +13,7 @@ namespace Logica
     {
         private readonly db_a97d9e_zonamovilEntities _db;
 
+  
         // con _db accedemos a las tablas de la bd
         public Cliente_LN()
         {

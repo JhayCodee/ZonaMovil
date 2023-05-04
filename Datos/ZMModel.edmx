@@ -11,6 +11,7 @@
           </Key>
           <Property Name="IdCategoria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Cliente">
           <Key>
@@ -86,6 +87,7 @@
           </Key>
           <Property Name="IdMarca" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="PedidoVenta">
           <Key>
@@ -325,6 +327,7 @@
           <Property Name="IdCategoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Producto" Relationship="Self.FK_Producto_Categoria" FromRole="Categoria" ToRole="Producto" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Cliente">
           <Key>
@@ -413,6 +416,7 @@
           <Property Name="IdMarca" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Producto" Relationship="Self.FK_Producto_Marca" FromRole="Marca" ToRole="Producto" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="PedidoVenta">
           <Key>
@@ -658,6 +662,7 @@
           <EntitySetMapping Name="Categoria">
             <EntityTypeMapping TypeName="Contexto.Categoria">
               <MappingFragment StoreEntitySet="Categoria">
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
                 <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
               </MappingFragment>
@@ -740,6 +745,7 @@
           <EntitySetMapping Name="Marca">
             <EntityTypeMapping TypeName="Contexto.Marca">
               <MappingFragment StoreEntitySet="Marca">
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
                 <ScalarProperty Name="IdMarca" ColumnName="IdMarca" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
               </MappingFragment>

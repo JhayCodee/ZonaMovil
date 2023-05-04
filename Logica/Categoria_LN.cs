@@ -31,7 +31,7 @@ namespace Logica
                         IdCategoria = c.IdCategoria,
                         Nombre = c.Nombre
                     })
-                  //  .Where(c => c.Ac == 1)
+                    .Where(c => c.Activo == true)
                     .ToList();
 
                 return true;
@@ -66,26 +66,22 @@ namespace Logica
 
 
         // Edita una categoria existente
-        /*
+        
         public bool EditarCategoria(int id, ref Categoria_VM categoria, ref string mensaje)
         {
             try
             {
-                Cliente clienteExistente = _db.Cliente.FirstOrDefault(c => c.IdCliente == id);
-                if (clienteExistente != null)
+                Categoria categoriaExistente = _db.Categoria.FirstOrDefault(c => c.IdCategoria == id);
+                if (categoriaExistente != null)
                 {
-                    clienteExistente.Nombres = cliente.Nombres;
-                    clienteExistente.Apellidos = cliente.Apellidos;
-                    clienteExistente.Cedula = cliente.Cedula;
-                    clienteExistente.Correo = cliente.Correo;
-                    clienteExistente.Telefono = cliente.Telefono;
-                    _db.Entry(clienteExistente).State = EntityState.Modified;
+                    categoriaExistente.Nombre = categoria.Nombre;
+                    _db.Entry(categoriaExistente).State = EntityState.Modified;
                     _db.SaveChanges();
                     return true;
                 }
                 else
                 {
-                    mensaje = "No se encontró el cliente con ID " + id;
+                    mensaje = "No se encontró la categoria con ID " + id;
                     return false;
                 }
             }
@@ -96,8 +92,61 @@ namespace Logica
             }
         }
 
-        */
+        public bool EliminarCategoria(int id, ref string mensaje)
+        {
+            try
+            {
+                Categoria categoriaExistente = _db.Categoria.FirstOrDefault(c => c.IdCategoria == id);
 
+                if (categoriaExistente != null)
+                {
+                    categoriaExistente.Activo = false;
+
+                    _db.Entry(categoriaExistente).State = EntityState.Modified;
+                    _db.SaveChanges();
+                    return true;
+                }
+                else
+                {
+                    mensaje = "No se encontró la categoria con ID " + id;
+                    return false;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                mensaje = "Error al eliminar el cliente: " + ex.Message;
+                return false;
+            }
+        }
+        
+
+        public Categoria_VM BuscarCategoriaPorId(int id)
+        {
+            try
+            {
+                var categoria = _db.Categoria.FirstOrDefault(c => c.IdCategoria == id);
+                if (categoria != null)
+                {
+                    var categoriaVM = new Categoria_VM
+                    {
+                        IdCategoria = categoria.IdCategoria,
+                        Nombre = categoria.Nombre
+                    };
+
+                    return categoriaVM;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al obtener la categoria: " + ex.Message);
+                return null;
+            }
+        }
 
     }
 }

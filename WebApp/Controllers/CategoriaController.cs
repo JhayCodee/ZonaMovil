@@ -8,32 +8,34 @@ using Modelo;
 
 namespace WebApp.Controllers
 {
-    public class ClienteController : Controller
+    public class CategoriaController : Controller
     {
-        private readonly Cliente_LN clienteLN;
+        private readonly Categoria_LN categoriaLN;
 
-        public ClienteController()
+        public CategoriaController()
         {
-            clienteLN = new Cliente_LN();
+            categoriaLN = new Categoria_LN();
         }
 
-        // GET: Cliente
+
+
+        // GET: Categoria
         public ActionResult Index()
         {
             return View();
         }
 
         [HttpGet]
-        public JsonResult ListarClientes()
+        public JsonResult ListarCategorias()
         {
-            List<Cliente_VM> listaClientes = new List<Cliente_VM>();
+            List<Categoria_VM> ListaCategorias = new List<Categoria_VM>();
             string errorMsj = string.Empty;
             // hola
-            var res = clienteLN.ListarClientes(ref listaClientes, ref errorMsj);
+            var res = categoriaLN.ListarCategorias(ref ListaCategorias, ref errorMsj);
 
             if (res)
             {
-                return Json(listaClientes, JsonRequestBehavior.AllowGet);
+                return Json(ListaCategorias, JsonRequestBehavior.AllowGet);
             }
             else
             {
@@ -42,21 +44,21 @@ namespace WebApp.Controllers
         }
 
         [HttpGet]
-        public JsonResult BuscarClientePorID(int id)
+        public JsonResult BuscarCategoriaPorID(int id)
         {
-            var cliente = clienteLN.BuscarClientePorId(id);
-            return Json(cliente, JsonRequestBehavior.AllowGet);
+            var categoria = categoriaLN.BuscarCategoriaPorId(id);
+            return Json(categoria, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
-        public JsonResult AgregarCliente(Cliente_VM cliente)
+        public JsonResult AgregarCategoria(Categoria_VM categoria)
         {
             string mensaje = string.Empty;
-            bool resultado = clienteLN.AgregarCliente(ref cliente, ref mensaje);
+            bool resultado = categoriaLN.AgregarCategoria(ref categoria, ref mensaje);
 
             if (resultado)
             {
-                return Json(new { success = true, message = "Cliente agregado correctamente" });
+                return Json(new { success = true, message = "Categoria agregada correctamente" });
             }
             else
             {
@@ -65,11 +67,11 @@ namespace WebApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditarCliente(Cliente_VM cliente)
+        public ActionResult EditarCategoria(Categoria_VM categoria)
         {
-            int id = cliente.IdCliente;
+            int id = categoria.IdCategoria;
             string mensaje = "";
-            bool resultado = clienteLN.EditarCliente(id, ref cliente, ref mensaje);
+            bool resultado = categoriaLN.EditarCategoria(id, ref categoria, ref mensaje);
 
             if (resultado)
             {
@@ -78,16 +80,16 @@ namespace WebApp.Controllers
             else
             {
                 ViewBag.Mensaje = mensaje;
-                return View(cliente);
+                return View(categoria);
             }
         }
 
         [HttpPost]
-        public JsonResult EliminarCliente(int id)
+        public JsonResult EliminarCategoria(int id)
         {
             string mensaje = string.Empty;
 
-            bool res = clienteLN.EliminarCliente(id, ref mensaje);
+            bool res = categoriaLN.EliminarCategoria(id, ref mensaje);
 
             if (res)
             {

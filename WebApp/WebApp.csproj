@@ -124,6 +124,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CategoriaController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductoController.cs" />
@@ -1832,6 +1833,8 @@
     <Content Include="Scripts\js\sb-admin-2.js" />
     <Content Include="Scripts\js\sb-admin-2.min.js" />
     <Content Include="Scripts\swal\swal.js" />
+    <Content Include="Scripts\VistasJS\Categoria\Index.js" />
+    <Content Include="Scripts\VistasJS\Categoria\Validaciones.js" />
     <Content Include="Scripts\VistasJS\Cliente\Index.js" />
     <Content Include="Scripts\VistasJS\Cliente\Validaciones.js" />
     <Content Include="Scripts\VistasJS\Producto\Producto.js" />
@@ -2011,6 +2014,7 @@
     <Content Include="Scripts\jquery\jquery.min.map" />
     <Content Include="Scripts\jquery\jquery.slim.min.map" />
     <Content Include="Views\Producto\Index.cshtml" />
+    <Content Include="Views\Categoria\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Logica\Logica.csproj">
