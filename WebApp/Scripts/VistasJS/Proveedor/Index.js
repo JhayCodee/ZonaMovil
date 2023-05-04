@@ -99,6 +99,8 @@
                                     'success'
                                 ).then(() => {
                                     cargarTablaProveedor();
+                                    $("#FormularioProveedor").find(".is-invalid").removeClass("is-invalid");
+                                    $("#FormularioProveedor").find(".is-valid").removeClass("is-valid");
                                     vistaProveedorComponente.contenedorTabla.show();
                                     vistaProveedorComponente.contenedorFormulario.hide();
                                 });
@@ -127,6 +129,8 @@
                             'success'
                         ).then(() => {
                             cargarTablaProveedor();
+                            $("#FormularioProveedor").find(".is-invalid").removeClass("is-invalid");
+                            $("#FormularioProveedor").find(".is-valid").removeClass("is-valid");
                             vistaProveedorComponente.contenedorTabla.show();
                             vistaProveedorComponente.contenedorFormulario.hide();
                         });
