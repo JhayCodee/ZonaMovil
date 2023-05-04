@@ -29,7 +29,8 @@ namespace Logica
                     .Select(c => new Categoria_VM
                     {
                         IdCategoria = c.IdCategoria,
-                        Nombre = c.Nombre
+                        Nombre = c.Nombre,
+                        Activo = c.Activo
                     })
                     .Where(c => c.Activo == true)
                     .ToList();
