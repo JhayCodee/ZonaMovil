@@ -1,0 +1,69 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<div id="marcaIndexContainer">
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Marca</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="TablaMarca" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            @*<th>IdMarca</th>*@
+                            <th>Nombre</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            @*<th>IdMarca</th>*@
+                            <th>Nombre</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div id="marcaFormularioContainer">
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Agregar Nueva Marca</h6>
+        </div>
+        <div class="card-body">
+            <form id="FormularioMarca">
+                <input type="hidden" class="form-control" id="IdMarca" name="IdMarca" placeholder="" value="">
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label for="NombreMarca">Nombre</label>
+                        <input type="text" class="form-control" id="NombreMarca" name="Nombre" placeholder="Nombre" value="">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 d-flex justify-content-end">
+                        <button type="button" id="btnRegresarMarca" class="btn btn-info">Volver</button>
+                        <button type="submit" id="btnGuardarMarca" class="btn btn-primary ml-2">Guardar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+@section scripts {
+    <script src="~/Scripts/VistasJS/Marca/Validaciones.js"></script>
+    <script src="~/Scripts/VistasJS/Marca/Index.js"></script>
+}
+
