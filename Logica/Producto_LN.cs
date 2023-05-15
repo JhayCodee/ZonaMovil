@@ -46,5 +46,40 @@ namespace Logica
                 return false;
             }
         }
+
+        public Producto_VM BuscarProductoPorId(int id)
+        {
+            try
+            {
+                var p = _db.Producto.FirstOrDefault(c => c.IdProducto  == id);
+                if (p != null)
+                {
+                    var Producto = new Producto_VM
+                    {
+                        IdProducto = p.IdProducto,
+                        Nombre = p.Nombre,
+                        Modelo = p.Modelo,
+                        Descripcion = p.Descripcion,
+                        Stock = p.Stock,
+                        GarantiaEnMeses = p.GarantiaEnMeses,
+                        IdMarca = p.IdMarca,
+                        IdCategoria = p.IdCategoria,
+                        PrecioCompra = p.PrecioCompra,
+                        PrecioVenta = p.PrecioVenta
+                    };
+
+                    return Producto;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al obtener el Producto: " + ex.Message);
+                return null;
+            }
+        }
     }
 }

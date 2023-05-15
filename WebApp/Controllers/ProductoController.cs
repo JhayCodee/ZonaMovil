@@ -40,5 +40,29 @@ namespace WebApp.Controllers
             }
         }
 
+        [HttpPost]
+        public JsonResult AgregarProducto(Producto_VM Data)
+        {
+            if (true)
+            {
+                return Json(new { success = true, message = "Cliente agregado correctamente" });
+            }
+        }
+
+        [HttpPost]
+        public JsonResult BuscarProductoPorID(int id)
+        {
+            var producto = new Producto_LN().BuscarProductoPorId(id);
+
+            if (producto == null)
+            {
+                // El producto no se encontró, puedes devolver un mensaje de error o un objeto indicando que no se encontró el producto
+                return Json(new { mensaje = "Producto no encontrado" }, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(producto, JsonRequestBehavior.AllowGet);
+        }
+
+
     }
 }
