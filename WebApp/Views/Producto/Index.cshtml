@@ -10,7 +10,7 @@
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Productos</h6>
         </div>
-        <div class="card-body">
+        <div class="card-body ">
             <div class="table-responsive">
                 <table class="table table-bordered" id="tablaProducto" width="100%" cellspacing="0">
                     <thead>
@@ -44,8 +44,83 @@
 
 </div>
 
+<div id="ProductoFormularioContainer">
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Agregar Nuevo  Producto</h6>
+        </div>
+        <div class="card-body">
+            <form id="FormularioProducto">
+                <input type="hidden" class="form-control" id="IdProducto" name="IdProducto" placeholder="" value="">
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label for="NombreProducto">Nombre</label>
+                        <input type="text" class="form-control" id="NombreProducto" name="Nombre" placeholder="NombreProducto" value="">
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="ModeloProducto">Modelo</label>
+                        <input type="text" class="form-control" id="ModeloProducto" name="Modelo" placeholder="Modelo" value="">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label for="StockProducto">Stock</label>
+                        <input type="number" class="form-control" id="StockProducto" name="Stock" placeholder="0" value="">
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="StockProducto">Garantia (Meses)</label>
+                        <input type="number" class="form-control" id="GarantiaProducto" name="GarantiaEnMeses" placeholder="0" value="">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label for="StockProducto">Marca</label>
+                        <select class="form-control selectpicker dropdown-menu-down" id="MarcaSelect" data-live-search="true" data-placement="bottom" name="IdMarca">
+                            <option value="">Seleccionar categoría</option>
+                        </select>
+                        <input type="hidden" id="MarcaIdInput" name="categoriaId">
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="StockProducto">Categoria</label>
+                        <select class="form-control selectpicker dropdown-menu-down" id="categoriaSelect" data-live-search="true" data-placement="bottom" name="IdCategoria">
+                            <option value="">Seleccionar categoría</option>
+                        </select>
+                        <input type="hidden" id="categoriaIdInput" name="categoriaId">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label for="StockProducto">Precio de Compra</label>
+                        <input type="number" class="form-control" id="PrecioCompra" name="PrecioCompra" placeholder="0" value="">
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="StockProducto">Precio de Venta</label>
+                        <input type="number" class="form-control" id="PrecioVenta" name="PrecioVenta" placeholder="0" value="">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-12">
+                        <label for="exampleFormControlTextarea1">Descripcion</label>
+                        <textarea class="form-control" id="DescripcionProducto" rows="3" name="Descripcion"></textarea>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-12 d-flex justify-content-end">
+                        <button type="button" id="btnRegresarProducto" class="btn btn-info">Volver</button>
+                        <button type="submit" id="btnGuardarProducto" class="btn btn-primary ml-2">Guardar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
 @section scripts {
-
-    <script src="~/Scripts/VistasJS/Producto/Producto.js"></script>
-
+<script src="~/Scripts/VistasJS/Producto/Validaciones.js"></script>
+<script src="~/Scripts/VistasJS/Producto/Producto.js"></script>
 }

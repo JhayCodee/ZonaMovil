@@ -1842,6 +1842,7 @@
     <Content Include="Scripts\VistasJS\Marca\Index.js" />
     <Content Include="Scripts\VistasJS\Marca\Validaciones.js" />
     <Content Include="Scripts\VistasJS\Producto\Producto.js" />
+    <Content Include="Scripts\VistasJS\Producto\Validaciones.js" />
     <Content Include="Scripts\VistasJS\Proveedor\Index.js" />
     <Content Include="Scripts\VistasJS\Proveedor\Validaciones.js" />
     <Content Include="Web.config" />
