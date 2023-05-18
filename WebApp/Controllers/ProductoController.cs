@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Logica;
 using Modelo;
+using Modelo.ProcedimientosAlmacenados;
 
 namespace WebApp.Controllers
 {
@@ -22,6 +23,8 @@ namespace WebApp.Controllers
         {
             return View();
         }
+
+        #region CRUD
 
         [HttpGet]
         public JsonResult ListarProductos()
@@ -43,11 +46,57 @@ namespace WebApp.Controllers
         [HttpPost]
         public JsonResult AgregarProducto(Producto_VM Data)
         {
-            if (true)
+            string errMsj = string.Empty;
+
+            if (new Producto_LN().AgregarProducto(Data, ref errMsj))
             {
-                return Json(new { success = true, message = "Cliente agregado correctamente" });
+                return Json(new { success = true, message = "Producto agregado correctamente" });
+            }
+            else
+            {
+                return Json(new { error = errMsj }, JsonRequestBehavior.AllowGet);
+
             }
         }
+
+        [HttpPost]
+        public JsonResult EditarProducto(Producto_VM data)
+        {
+            string errMsg = string.Empty;
+
+            if (new Producto_LN().EditarProducto(data.IdProducto, data, ref errMsg))
+            {
+                return Json(new { success = true, message = "Producto actualizado correctamente" });
+            }
+            else
+            {
+                return Json(new { error = errMsg, success = false }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [HttpPost]
+        public JsonResult EliminarProducto(int id)
+        {
+            string errorMessage = string.Empty;
+            bool success = ProductoLN.EliminarProducto(id, ref errorMessage);
+
+            if (success)
+            {
+                // El producto se eliminó correctamente
+                return Json(new { success = true, message = "El producto se eliminó correctamente." });
+            }
+            else
+            {
+                // Ocurrió un error al eliminar el producto
+                return Json(new { success = false, message = errorMessage });
+            }
+        }
+
+
+        #endregion
+
+
+        #region consultas
 
         [HttpPost]
         public JsonResult BuscarProductoPorID(int id)
@@ -62,6 +111,28 @@ namespace WebApp.Controllers
 
             return Json(producto, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpPost]
+        public JsonResult ObtenerDetalleProducto(int id)
+        {
+            string errorMessage = "";
+            ObtenerDetalleProducto_VM detalle = new ObtenerDetalleProducto_VM();
+
+            bool success = ProductoLN.ObtenerDetalleProducto(id, ref errorMessage, ref detalle);
+
+            if (success)
+            {
+                return Json(new { success = true, data = detalle }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { success = false, errorMessage = errorMessage }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        #endregion
+
+
 
 
     }

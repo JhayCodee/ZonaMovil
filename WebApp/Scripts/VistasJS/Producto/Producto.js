@@ -13,6 +13,8 @@
     // se oculta el formulario
     vistaProductoComponente.contenedorFormulario.hide();
     cargarTablaProductos();
+    cargarOpcionesCategoria();
+    cargarOpcionesMarca();
 
     // poblar el formularion con editar:
     $("#tablaProducto").on('click', '.btnEditar', function () {
@@ -20,7 +22,6 @@
         var producto = $(this).data('id');
         modo = "editar"
         resetFormProduct();
-
         // Llamar al método de búsqueda por ID para obtener la información del cliente
         $.ajax({
             url: vistaProductoComponente.url + '/BuscarProductoPorID',
@@ -28,6 +29,7 @@
             data: { id: producto },
             success: function (producto) {
                 // Poblar el formulario con la información del cliente
+                $("#IdProducto").val(producto.IdProducto);
                 $('#NombreProducto').val(producto.Nombre);
                 $('#ModeloProducto').val(producto.Modelo);
                 $('#StockProducto').val(producto.Stock);
@@ -37,8 +39,7 @@
                 $('#DescripcionProducto').val(producto.Descripcion);
 
                 //poblar los selectpicker
-                cargarOpcionesCategoria();
-                cargarOpcionesMarca();
+                
 
                 // Seleccionar la opción correspondiente al ID de categoría del producto
                 $('#categoriaSelect').val(producto.IdCategoria);
@@ -60,6 +61,54 @@
         });
     });
 
+    $("#tablaProducto").on('click', '.btnEliminar', function () {
+        var id = $(this).data('id');
+
+        // Mostrar Sweet Alert para confirmar la eliminación
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "Esta acción eliminará el producto.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Realizar la eliminación del producto mediante una petición AJAX
+                $.ajax({
+                    url: '/Producto/EliminarProducto',
+                    type: 'POST',
+                    data: { id: id },
+                    success: function (response) {
+                        if (response.success) {
+                            // El producto se eliminó correctamente
+                            Swal.fire({
+                                title: 'Eliminado',
+                                text: response.message,
+                                icon: 'success'
+                            }).then(() => {
+                                // Actualizar la tabla o realizar otras acciones necesarias
+                                // por ejemplo, recargar la página:
+                                cargarTablaProductos()
+                            });
+                        } else {
+                            // Ocurrió un error al eliminar el producto
+                            Swal.fire('Error', response.message, 'error');
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        // Ocurrió un error en la petición AJAX
+                        Swal.fire('Error', 'Ocurrió un error en la petición.', 'error');
+                    }
+                });
+            }
+        });
+    });
+
+    
+
     $('#btnGuardarProducto').click(function (e) {
 
         e.preventDefault();
@@ -67,51 +116,149 @@
         if ($('#FormularioProducto').valid()) {
             console.log('Valido');
 
+            idP = $("#IdProducto").val();
+
             var data = {
                 Nombre: $('#NombreProducto').val(),
                 Modelo: $('#ModeloProducto').val(),
                 Stock: $('#StockProducto').val(),
                 GarantiaEnMeses: $('#GarantiaProducto').val(),
-                IdMarca: $('#MarcaIdInput').val(),
-                IdCategoria: $('#categoriaIdInput').val(),
+                IdMarca: $('#MarcaSelect').val(),
+                IdCategoria: $('#categoriaSelect').val(),
                 PrecioCompra: $('#PrecioCompra').val(),
                 PrecioVenta: $('#PrecioVenta').val(),
                 Descripcion: $('#DescripcionProducto').val(),
                 Activo: true
             };
 
-            $.ajax({
-                type: 'POST',
-                url: '/Producto/AgregarProducto',
-                data: data,
-                success: function (response) {
-                    // Manejar la respuesta del controlador si es necesario
-                    console.log(response);
-                    // Mostrar SweetAlert de éxito y volver a la tabla
-                    Swal.fire(
-                        'Agregado!',
-                        'Este Producto se ha Agregado.',
-                        'success'
-                    ).then(() => {
-                        cargarTablaProductos();
-                        resetFormProduct();
-                        vistaProductoComponente.contenedorTabla.show();
-                        vistaProductoComponente.contenedorFormulario.hide();
-                    });
-                },      
-                error: function (xhr, status, error) {
-                    // Manejar el error si es necesario
-                    console.log(xhr.responseText);
-                }
-            });
+            // determinar si se trata de una operación de creación o edición
+            var url = "";
+            if (modo === "editar") {
+                data.IdProducto = idP;
+                url = vistaProductoComponente.url + '/EditarProducto';
+                Swal.fire({
+                    title: 'Estas seguro?',
+                    text: "Este registro se actualizará",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Si, Actualizar!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Realizar solicitud AJAX para actualizar el registro
+                        $.ajax({
+                            type: 'POST',
+                            url: url,
+                            data: data,
+                            success: function (response) {
+                                // Verificar si la propiedad success es igual a true
+                                if (response.success) {
+                                    // Manejar la respuesta del controlador si es necesario
+                                    console.log(response);
+                                    // Mostrar SweetAlert de éxito y volver a la tabla
+                                    Swal.fire(
+                                        'Actualizado!',
+                                        'Este registro se ha actualizado.',
+                                        'success'
+                                    ).then(() => {
+                                        cargarTablaProductos();
+                                        vistaProductoComponente.contenedorTabla.show();
+                                        vistaProductoComponente.contenedorFormulario.hide();
+                                    });
+                                } else {
+                                    // Mostrar SweetAlert de error si la propiedad success no es true
+                                    Swal.fire(
+                                        'Error!',
+                                        'Ha ocurrido un error al actualizar el registro.',
+                                        'error'
+                                    );
+                                }
+                            },
+                            error: function (xhr, status, error) {
+                                // Manejar el error si es necesario
+                                console.log(xhr.responseText);
 
+                                // Obtener el mensaje de error del objeto JSON de respuesta
+                                var response = JSON.parse(xhr.responseText);
+                                var errorMessage = response.error;
+
+                                // Mostrar SweetAlert de error con el mensaje específico
+                                Swal.fire(
+                                    'Error!',
+                                    errorMessage,
+                                    'error'
+                                );
+                            }
+                        });
+                    }
+                });
+            }
+            else {
+                $.ajax({
+                    type: 'POST',
+                    url: '/Producto/AgregarProducto',
+                    data: data,
+                    success: function (response) {
+                        // Manejar la respuesta del controlador si es necesario
+                        console.log(response);
+                        // Mostrar SweetAlert de éxito y volver a la tabla
+                        Swal.fire(
+                            'Agregado!',
+                            'Este Producto se ha Agregado.',
+                            'success'
+                        ).then(() => {
+                            cargarTablaProductos();
+                            resetFormProduct();
+                            vistaProductoComponente.contenedorTabla.show();
+                            vistaProductoComponente.contenedorFormulario.hide();
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        // Manejar el error si es necesario
+                        console.log(xhr.responseText);
+                    }
+                });
+            }
         }
         else {
             console.log('Invalido');
         }
 
     });
-    
+
+    $("#tablaProducto").on('click', '.btnVer', function () {
+        var id = $(this).data('id');
+        $.ajax({
+            url: '/Producto/ObtenerDetalleProducto',
+            type: 'POST',
+            data: { id: id },
+            success: function (response) {
+                if (response.success) {
+                    var data = response.data;
+                    // Cargar los valores en los inputs bloqueados
+                    $("#detalleIdProducto").val(data.IdProducto);
+                    $("#detalleNombreProducto").val(data.Nombre);
+                    $("#detalleModeloProducto").val(data.Modelo);
+                    $("#detalleStockProducto").val(data.Stock);
+                    $("#detalleGarantiaProducto").val(data.GarantiaEnMeses);
+                    $("#detalleMarcaInput").val(data.Marca);
+                    $("#detalleCategoriaInput").val(data.Categoria);
+                    $("#detallePrecioCompra").val(data.PrecioCompra);
+                    $("#detallePrecioVenta").val(data.PrecioVenta);
+                    $("#detalleDescripcionProducto").val(data.Descripcion);
+
+                    // Abrir el modal
+                    $("#detalleproductoModal").modal("show");
+                } else {
+                    console.log("Error: " + response.message);
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log(error);
+            }
+        });
+    });
 
 
     // Listener para el evento "changed.bs.select" del selectpicker categoria
@@ -173,8 +320,6 @@
                             action: function (e, dt, node, config) {
                                 resetFormProduct();
                                 modo = "crear"
-                                cargarOpcionesCategoria();
-                                cargarOpcionesMarca();
                                 vistaProductoComponente.contenedorTabla.hide();
                                 vistaProductoComponente.contenedorFormulario.show();
                             }

@@ -12,6 +12,8 @@ namespace Datos
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class db_a97d9e_zonamovilEntities : DbContext
     {
@@ -36,5 +38,14 @@ namespace Datos
         public virtual DbSet<PedidoVenta> PedidoVenta { get; set; }
         public virtual DbSet<Producto> Producto { get; set; }
         public virtual DbSet<Proveedor> Proveedor { get; set; }
+    
+        public virtual ObjectResult<spObtenerDetalleProducto_Result> spObtenerDetalleProducto(Nullable<int> idProducto)
+        {
+            var idProductoParameter = idProducto.HasValue ?
+                new ObjectParameter("IdProducto", idProducto) :
+                new ObjectParameter("IdProducto", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spObtenerDetalleProducto_Result>("spObtenerDetalleProducto", idProductoParameter);
+        }
     }
 }

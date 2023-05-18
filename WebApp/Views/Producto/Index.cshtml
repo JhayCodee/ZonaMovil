@@ -44,7 +44,7 @@
 
 </div>
 
-<div id="ProductoFormularioContainer">
+<div id="ProductoFormularioContainer" style="display: none;">
 
     <div class="card shadow mb-4">
         <div class="card-header py-3">
@@ -120,7 +120,80 @@
 
 </div>
 
+<!-- Ventana modal -->
+<div class="modal fade" id="detalleproductoModal" tabindex="-1" role="dialog" aria-labelledby="detalleproductoModalLabel" aria-hidden="true" style="display:none;">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="detalleproductoModalLabel">Detalles del producto</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" class="form-control" id="detalleIdProducto" name="detalleIdProducto" placeholder="" value="">
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label for="detalleNombreProducto">Nombre</label>
+                        <input type="text" class="form-control" id="detalleNombreProducto" name="detalleNombreProducto" placeholder="NombreProducto" value="" readonly>
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="detalleModeloProducto">Modelo</label>
+                        <input type="text" class="form-control" id="detalleModeloProducto" name="detalleModeloProducto" placeholder="Modelo" value="" readonly>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label for="detalleStockProducto">Stock</label>
+                        <input type="number" class="form-control" id="detalleStockProducto" name="detalleStockProducto" placeholder="0" value="" readonly>
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="detalleGarantiaProducto">Garantia (Meses)</label>
+                        <input type="number" class="form-control" id="detalleGarantiaProducto" name="detalleGarantiaProducto" placeholder="0" value="" readonly>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label for="StockProducto">Marca</label>
+                        <input type="text" class="form-control" id="detalleMarcaInput" name="Marca" placeholder="Marca" readonly>
+                        <input type="hidden" id="MarcaIdInput" name="IdMarca">
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="StockProducto">Categoría</label>
+                        <input type="text" class="form-control" id="detalleCategoriaInput" name="Categoria" placeholder="Categoría" readonly>
+                        <input type="hidden" id="CategoriaIdInput" name="IdCategoria">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label for="detallePrecioCompra">Precio de Compra</label>
+                        <input type="number" class="form-control" id="detallePrecioCompra" name="detallePrecioCompra" placeholder="0" value="" readonly>
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="detallePrecioVenta">Precio de Venta</label>
+                        <input type="number" class="form-control" id="detallePrecioVenta" name="detallePrecioVenta" placeholder="0" value="" readonly>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-12">
+                        <label for="detalleDescripcionProducto">Descripción</label>
+                        <textarea class="form-control" id="detalleDescripcionProducto" rows="3" name="detalleDescripcionProducto" readonly></textarea>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 @section scripts {
-<script src="~/Scripts/VistasJS/Producto/Validaciones.js"></script>
-<script src="~/Scripts/VistasJS/Producto/Producto.js"></script>
+    <script src="~/Scripts/VistasJS/Producto/Validaciones.js"></script>
+    <script src="~/Scripts/VistasJS/Producto/Producto.js"></script>
 }
