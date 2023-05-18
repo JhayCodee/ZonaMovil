@@ -259,6 +259,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="spObtenerDetalleProducto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdProducto" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="ContextoStoreContainer">
           <EntitySet Name="Categoria" EntityType="Self.Categoria" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
@@ -652,7 +655,23 @@
             <End Role="Marca" EntitySet="Marca" />
             <End Role="Producto" EntitySet="Producto" />
           </AssociationSet>
+          <FunctionImport Name="spObtenerDetalleProducto" ReturnType="Collection(Contexto.spObtenerDetalleProducto_Result)">
+            <Parameter Name="IdProducto" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="spObtenerDetalleProducto_Result">
+          <Property Type="Int32" Name="IdProducto" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Modelo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="Stock" Nullable="true" />
+          <Property Type="Int32" Name="GarantiaEnMeses" Nullable="true" />
+          <Property Type="Boolean" Name="Activo" Nullable="true" />
+          <Property Type="Decimal" Name="PrecioCompra" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="PrecioVenta" Nullable="true" Precision="19" />
+          <Property Type="String" Name="Marca" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Categoria" Nullable="true" MaxLength="50" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -792,6 +811,23 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spObtenerDetalleProducto" FunctionName="Contexto.Store.spObtenerDetalleProducto">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Contexto.spObtenerDetalleProducto_Result">
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Modelo" ColumnName="Modelo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="GarantiaEnMeses" ColumnName="GarantiaEnMeses" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="PrecioCompra" ColumnName="PrecioCompra" />
+                <ScalarProperty Name="PrecioVenta" ColumnName="PrecioVenta" />
+                <ScalarProperty Name="Marca" ColumnName="Marca" />
+                <ScalarProperty Name="Categoria" ColumnName="Categoria" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
