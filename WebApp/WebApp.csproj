@@ -130,6 +130,7 @@
     <Compile Include="Controllers\MarcaController.cs" />
     <Compile Include="Controllers\ProductoController.cs" />
     <Compile Include="Controllers\ProveedorController.cs" />
+    <Compile Include="Controllers\VentasController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1834,6 +1835,8 @@
     <Content Include="Scripts\js\demo\datatables-demo.js" />
     <Content Include="Scripts\js\sb-admin-2.js" />
     <Content Include="Scripts\js\sb-admin-2.min.js" />
+    <Content Include="Scripts\libs\inputmask\inputmask.js" />
+    <Content Include="Scripts\libs\moment\moment.js" />
     <Content Include="Scripts\swal\swal.js" />
     <Content Include="Scripts\VistasJS\Categoria\Index.js" />
     <Content Include="Scripts\VistasJS\Categoria\Validaciones.js" />
@@ -1845,6 +1848,7 @@
     <Content Include="Scripts\VistasJS\Producto\Validaciones.js" />
     <Content Include="Scripts\VistasJS\Proveedor\Index.js" />
     <Content Include="Scripts\VistasJS\Proveedor\Validaciones.js" />
+    <Content Include="Scripts\VistasJS\Ventas\Ventas.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -2024,6 +2028,7 @@
     <Content Include="Views\Categoria\Index.cshtml" />
     <Content Include="Views\Proveedor\Index.cshtml" />
     <Content Include="Views\Marca\Index.cshtml" />
+    <Content Include="Views\Ventas\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Logica\Logica.csproj">

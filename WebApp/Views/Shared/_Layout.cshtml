@@ -97,8 +97,7 @@
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="buttons.html">Proveedores</a>
-                        <a class="collapse-item" href="cards.html">Comprar Productos</a>
+                        <a class="collapse-item" href="cards.html">Compras</a>
                         <a class="collapse-item" href="cards.html">Historial de compras</a>
                     </div>
                 </div>
@@ -114,9 +113,8 @@
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                      data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="utilities-color.html">Facturar</a>
-                        <a class="collapse-item" href="utilities-border.html">Realizar pedido</a>
-                        <a class="collapse-item" href="utilities-animation.html">Historial de ventas</a>
+                        <a class="collapse-item" href="@Url.Action("Index","Ventas")">Ventas</a>
+                        <a class="collapse-item" href="utilities-border.html">Pedidos</a>
                     </div>
                 </div>
             </li>
@@ -206,8 +204,6 @@
         </div>
     </div>
 
-    @*<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>*@
-
     <!-- Bootstrap core JavaScript-->
     <script src="~/Scripts/jquery/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
@@ -224,6 +220,9 @@
     <script src="~/Scripts/datatables/dataTables.bootstrap4.min.js"></script>
     <script src="~/Scripts/datatables/extensiones/js/dataTables.buttons.min.js"></script>
     <script src="~/Scripts/swal/swal.js"></script>
+    <script src="~/Scripts/libs/moment/moment.js"></script>
+    <script src="~/Scripts/libs/inputmask/inputmask.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.print.min.js"></script>

@@ -47,5 +47,19 @@ namespace Datos
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spObtenerDetalleProducto_Result>("spObtenerDetalleProducto", idProductoParameter);
         }
+    
+        public virtual ObjectResult<spInfoFacturaVenta_Result> spInfoFacturaVenta()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spInfoFacturaVenta_Result>("spInfoFacturaVenta");
+        }
+    
+        public virtual ObjectResult<spDetalleFacturaVenta_Result> spDetalleFacturaVenta(Nullable<int> nf)
+        {
+            var nfParameter = nf.HasValue ?
+                new ObjectParameter("nf", nf) :
+                new ObjectParameter("nf", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spDetalleFacturaVenta_Result>("spDetalleFacturaVenta", nfParameter);
+        }
     }
 }

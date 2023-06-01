@@ -259,6 +259,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="spDetalleFacturaVenta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nf" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spInfoFacturaVenta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="spObtenerDetalleProducto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdProducto" Type="int" Mode="In" />
         </Function>
@@ -656,7 +660,11 @@
             <End Role="Producto" EntitySet="Producto" />
           </AssociationSet>
           <FunctionImport Name="spObtenerDetalleProducto" ReturnType="Collection(Contexto.spObtenerDetalleProducto_Result)">
-            <Parameter Name="IdProducto" Mode="In" Type="Int32" />
+          <Parameter Name="IdProducto" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spInfoFacturaVenta" ReturnType="Collection(Contexto.spInfoFacturaVenta_Result)" />
+          <FunctionImport Name="spDetalleFacturaVenta" ReturnType="Collection(Contexto.spDetalleFacturaVenta_Result)" >
+            <Parameter Name="nf" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="spObtenerDetalleProducto_Result">
@@ -671,6 +679,30 @@
           <Property Type="Decimal" Name="PrecioVenta" Nullable="true" Precision="19" />
           <Property Type="String" Name="Marca" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="Categoria" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="spInfoFacturaVenta_Result">
+          <Property Type="Int32" Name="IdFacturaVenta" Nullable="false" />
+          <Property Type="Int32" Name="IdCliente" Nullable="false" />
+          <Property Type="String" Name="Cliente" Nullable="false" MaxLength="101" />
+          <Property Type="Int32" Name="NumeroFactura" Nullable="true" />
+          <Property Type="DateTime" Name="Fecha" Nullable="true" Precision="23" />
+          <Property Type="Decimal" Name="Impuesto" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="Total" Nullable="true" Precision="19" />
+          <Property Type="String" Name="TipoPago" Nullable="true" MaxLength="10" />
+          <Property Type="Boolean" Name="Activo" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="spDetalleFacturaVenta_Result">
+          <Property Type="Int32" Name="NumeroFactura" Nullable="true" />
+          <Property Type="String" Name="Cliente" Nullable="false" MaxLength="101" />
+          <Property Type="String" Name="Cedula" Nullable="true" MaxLength="16" />
+          <Property Type="String" Name="Telefono" Nullable="true" MaxLength="8" />
+          <Property Type="DateTime" Name="Fecha" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Producto" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Modelo" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="PrecioVenta" Nullable="true" Precision="19" />
+          <Property Type="Int32" Name="Cantidad" Nullable="true" />
+          <Property Type="Decimal" Name="Impuesto" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="Total" Nullable="true" Precision="19" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -825,6 +857,38 @@
                 <ScalarProperty Name="PrecioVenta" ColumnName="PrecioVenta" />
                 <ScalarProperty Name="Marca" ColumnName="Marca" />
                 <ScalarProperty Name="Categoria" ColumnName="Categoria" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spInfoFacturaVenta" FunctionName="Contexto.Store.spInfoFacturaVenta">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Contexto.spInfoFacturaVenta_Result">
+                <ScalarProperty Name="IdFacturaVenta" ColumnName="IdFacturaVenta" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="Cliente" ColumnName="Cliente" />
+                <ScalarProperty Name="NumeroFactura" ColumnName="NumeroFactura" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Impuesto" ColumnName="Impuesto" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="TipoPago" ColumnName="TipoPago" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spDetalleFacturaVenta" FunctionName="Contexto.Store.spDetalleFacturaVenta">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Contexto.spDetalleFacturaVenta_Result">
+                <ScalarProperty Name="NumeroFactura" ColumnName="NumeroFactura" />
+                <ScalarProperty Name="Cliente" ColumnName="Cliente" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Producto" ColumnName="Producto" />
+                <ScalarProperty Name="Modelo" ColumnName="Modelo" />
+                <ScalarProperty Name="PrecioVenta" ColumnName="PrecioVenta" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Impuesto" ColumnName="Impuesto" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

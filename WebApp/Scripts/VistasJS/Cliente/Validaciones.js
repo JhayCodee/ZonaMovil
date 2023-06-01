@@ -4,6 +4,12 @@
         return this.optional(element) || /^\d{3}-\d{6}-\d{4}[A-Za-z]$/.test(value);
     }, "Por favor ingrese una cédula válida en formato 000-000000-0000A.");
 
+    // Agregar la máscara al campo de cédula
+    $("#CedulaCliente").inputmask("999-999999-9999A", {
+        placeholder: " ",
+        clearMaskOnLostFocus: false
+    });
+
     $("#FormularioCliente").validate({
         rules: {
             Nombres: {
