@@ -44,6 +44,7 @@
     <Compile Include="Categoria_VM.cs" />
     <Compile Include="Cliente_VM.cs" />
     <Compile Include="Consultas\DetalleFacturaVentaConProductos_VM.cs" />
+    <Compile Include="Factura_VM.cs" />
     <Compile Include="Marca_VM.cs" />
     <Compile Include="ProcedimientosAlmacenados\DetalleFacturaVenta_VM.cs" />
     <Compile Include="ProcedimientosAlmacenados\InfoFacturaVenta_VM.cs" />

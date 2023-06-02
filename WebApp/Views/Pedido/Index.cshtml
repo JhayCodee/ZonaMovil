@@ -1,0 +1,58 @@
+﻿@model List<Datos.FacturaVenta>
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+@using (Html.BeginForm("Index", "Pedidos", FormMethod.Post))
+{
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Busqueda de pedidos
+        </div>
+        <div class="panel-body">
+            <div class="form-inline">
+                @Html.Label("Intervalo de fecha de pedido:")
+                @Html.TextBox("fi", "", new { @class = "form-control" })
+                @Html.TextBox("ff", "", new { @class = "form-control" })
+            </div>
+            <div class="form-inline">
+                @Html.TextBox("cadena", "", new { @class = "form-control" })
+                <button type="submit" class="btn btn-default">Buscar</button>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+
+
+@if (Model != null)
+{
+    <table class="table">
+        <tr>
+            <th>ID</th>
+            <th>FECHAPED</th>
+            <th>FECHAENT</th>
+            <th>IDCLI</th>
+            <th>CLIENTE</th>
+            <th>IDVEN</th>
+            <th>VENDEDOR</th>
+        </tr>
+
+        @foreach (var p in Model)
+        {
+            <tr>
+                <td>@p.IdFacturaVenta</td>
+                <td>@p.NumeroFactura</td>
+                <td>@p.Fecha</td>
+                <td>@p.Impuesto</td>
+                <td>@p.Total</td>
+                <td>@p.TipoPago</td>
+                <td>@p.IdCliente</td>
+            </tr>
+        }
+    </table>
+}

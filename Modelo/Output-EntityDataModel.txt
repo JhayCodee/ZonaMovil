@@ -1,0 +1,16 @@
+﻿Generated model file: ZMModel.edmx.
+Loading metadata from the database took 00:00:02.1371603.
+Generating the model took 00:00:04.6380840.
+Added the connection string to the App.Config file.
+Generated model file: ZMModel.edmx.
+Loading metadata from the database took 00:00:01.7942108.
+Generating the model took 00:00:01.8426832.
+Generated model file: ZMModel.edmx.
+Loading metadata from the database took 00:00:01.5484092.
+Generating the model took 00:00:01.9759512.
+Generated model file: ZMModel.edmx.
+Loading metadata from the database took 00:00:01.4834269.
+Generating the model took 00:00:01.5786861.
+Generated model file: ZMModel.edmx.
+Loading metadata from the database took 00:00:01.5387423.
+Generating the model took 00:00:01.6351822.
