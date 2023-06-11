@@ -13,45 +13,6 @@ ComponenteFacturaVenta = {
 }
 
 
-// Evento de envío del formulario
-$('#FacturaVentaFormulario').submit(function (event) {
-    event.preventDefault(); // Evita el envío del formulario por defecto
-
-    // Obtener los datos del cliente seleccionado
-    var clienteId = $('#clienteSelectFV').val();
-
-    // Obtener los datos de la tabla
-    var productos = [];
-    $('#tablaFacturaVentaProductos tbody tr').each(function () {
-        var producto = {
-            nombre: $(this).find('td:eq(0)').text(),
-            modelo: $(this).find('td:eq(1)').text(),
-            precioVenta: parseFloat($(this).find('td:eq(2)').text())
-        };
-        productos.push(producto);
-    });
-
-    // Obtener los datos de la sección "Facturar"
-    var subtotal = parseFloat($('#subtotalFv').val());
-    var impuesto = parseFloat($('#ImpuestoFV').val());
-    var total = parseFloat($('#TotalFV').val());
-
-    // Crear un objeto con todos los datos recopilados
-    var datosFactura = {
-        clienteId: clienteId,
-        productos: productos,
-        subtotal: subtotal,
-        impuesto: impuesto,
-        total: total
-    };
-
-    // Aquí puedes realizar la lógica para procesar los datos, como enviarlos a través de una solicitud AJAX o realizar otras operaciones necesarias
-
-    // Mostrar los datos en la consola para verificar que se obtuvieron correctamente
-    console.log(datosFactura);
-});
-
-
 $("#tablaFacturasVentas").on('click', '.btnVer', function () {
     var id = $(this).data('id');
     $("#detalleFacturaVentaModal").modal("show");
@@ -91,6 +52,59 @@ $("#tablaFacturasVentas").on('click', '.btnVer', function () {
     });
 });
 
+
+$("#tablaFacturasVentas").on('click', '.btnImprimir', function () {
+    var nf = $(this).data('id');
+    window.location.href = '/Ventas/ImprimirFactura?numeroFactura=' + nf;
+});
+
+
+$("#tablaFacturasVentas").on('click', '.btnEliminar', function () {
+    var id = $(this).data('id');
+
+    // Mostrar Sweet Alert para confirmar la eliminación
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: "Esta acción eliminará el producto.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Realizar la eliminación del producto mediante una petición AJAX
+            $.ajax({
+                url: "/Ventas/EliminarFacturaVenta",
+                type: 'POST',
+                data: { id: id },
+                success: function (response) {
+                    if (response.success) {
+                        // El producto se eliminó correctamente
+                        Swal.fire({
+                            title: 'Eliminado',
+                            text: response.message,
+                            icon: 'success'
+                        }).then(() => {
+                            // Actualizar la tabla o realizar otras acciones necesarias
+                            // por ejemplo, recargar la página:
+                            cargarTablaFacturaVenta();
+                        });
+                    } else {
+                        // Ocurrió un error al eliminar el producto
+                        Swal.fire('Error', response.message, 'error');
+                    }
+                },
+                error: function (xhr, status, error) {
+                    // Ocurrió un error en la petición AJAX
+                    Swal.fire('Error', 'Ocurrió un error en la petición.', 'error');
+                }
+            });
+        }
+    });
+});
+
 // Evento de clic para el botón "Agregar producto"
 $('#addProductoFV').click(function () {
     // Obtener el producto seleccionado del selectpicker
@@ -112,6 +126,7 @@ $('#addProductoFV').click(function () {
                     newRow.append('<td>' + data.Nombre + '</td>');
                     newRow.append('<td>' + data.Modelo + '</td>');
                     newRow.append('<td>' + data.PrecioVenta + '</td>');
+                    newRow.append('<td style="display: none;">' + data.IdProducto + '</td>');
                     newRow.append('<td><button type="button" class="btn btn-danger btn-sm eliminarPFV-btn"><i class="fas fa-trash"></i></button></td>');
 
                     // Agregar la nueva fila a la tabla
@@ -124,7 +139,7 @@ $('#addProductoFV').click(function () {
                     $('#productoSelectFV').val('');
 
                     // Actualizar el selectpicker
-                    $('#productoSelectFV').selectpicker('refresh');
+                    cargarSelectProductos();
                 }
             },
             error: function (xhr, status, error) {
@@ -136,9 +151,101 @@ $('#addProductoFV').click(function () {
 });
 
 
+// Evento de envío del formulario
+$('#FacturaVentaFormulario').submit(function (event) {
+    event.preventDefault(); // Evita el envío del formulario por defecto
+
+    // Obtener el método de pago seleccionado
+    var metodoPago = "Efectivo"; // Valor predeterminado para Efectivo
+    if ($('#checkTarjetaFV').is(':checked')) {
+        metodoPago = "Tarjeta"; // Cambiar a 1 si Tarjeta está seleccionada
+    }
+
+    // Obtener los datos del cliente seleccionado
+    var clienteId = $('#clienteSelectFV').val();
+    var facturaId = $('#IdFacturaVenta').val();
+
+    // Obtener los datos de la tabla
+    var productos = [];
+    $('#tablaFacturaVentaProductos tbody tr').each(function () {
+        var producto = {
+            nombre: $(this).find('td:eq(0)').text(),
+            Cantidad: 1,
+            Precio: parseFloat($(this).find('td:eq(2)').text()),
+            IdProducto: parseFloat($(this).find('td:eq(3)').text())
+        };
+        productos.push(producto);
+    });
+
+    // Obtener los datos de la sección "Facturar"
+    var subtotal = parseFloat($('#subtotalFv').val());
+    var impuesto = parseFloat($('#ImpuestoFV').val());
+    var total = parseFloat($('#TotalFV').val());
+
+
+    var factura = {
+        IdCliente: clienteId,
+        IdFacturaVenta: facturaId,
+        Impuesto: impuesto,
+        Total: total,
+        TipoPago: metodoPago,
+        Activo: true
+    }
+
+    var data = {
+        fv: factura,
+        dfv: productos
+    };
+
+    $.ajax({
+        url: ComponenteFacturaVenta.url + '/AgregarFactura',
+        type: 'POST',
+        dataType: 'json',
+        data: JSON.stringify(data),
+        contentType: 'application/json',
+        success: function (response) {
+            Swal.fire(
+                'Agregado!',
+                'Este Producto se ha Agregado.',
+                'success'
+            ).then(() => {
+                cargarTablaFacturaVenta();
+                ComponenteFacturaVenta.contenedorTabla.show();
+                ComponenteFacturaVenta.contenedorFormulario.hide();
+            });
+        },
+        error: function (xhr, status, error) {
+            // Manejar el error de la petición AJAX
+            console.log('Error en la petición AJAX:', error);
+        }
+    });
+
+});
+
+
+$("#btnRegresarFV").click(function () {
+    ComponenteFacturaVenta.contenedorTabla.show();
+    ComponenteFacturaVenta.contenedorFormulario.hide();
+});
+
+
+$('#checkEfectivoFV').change(function () {
+    if ($(this).is(':checked')) {
+        $('#checkTarjetaFV').prop('disabled', true);
+    } else {
+        $('#checkTarjetaFV').prop('disabled', false);
+    }
+});
+
+$('#checkTarjetaFV').change(function () {
+    if ($(this).is(':checked')) {
+        $('#checkEfectivoFV').prop('disabled', true);
+    } else {
+        $('#checkEfectivoFV').prop('disabled', false);
+    }
+});
+
 // funciones 
-
-
 // Función para actualizar los valores de SubTotal, Impuesto y Total
 function actualizarValoresFactura() {
     var subtotal = 0;
@@ -220,9 +327,14 @@ function cargarSelectProductos() {
             // Deshabilitar la opción "Seleccionar categoría"
             opcionSeleccionar.prop('disabled', true);
 
-            // Agregar opciones al selectpicker
+            // Limpiar las opciones existentes en el selectpicker
+            selectpicker.empty();
+
+            // Agregar solo las opciones de productos con stock mayor a 0
             $.each(data, function (key, value) {
-                selectpicker.append('<option value="' + value.IdProducto + '">' + value.Nombre + '</option>');
+                if (value.Stock > 0) {
+                    selectpicker.append('<option value="' + value.IdProducto + '">' + value.Nombre + '</option>');
+                }
             });
 
             // Actualizar selectpicker
@@ -234,6 +346,7 @@ function cargarSelectProductos() {
         }
     });
 }
+
 
 
 function cargarTablaFacturaVenta() {
@@ -268,6 +381,7 @@ function cargarTablaFacturaVenta() {
                             return '<div class="centrar" style="display:flex; justify-content:center; gap:6px;">' +
                                 '<button type="button" class="btn btn-info btnVer" data-id="' + row.NumeroFactura + '"> <i class="fas fa-solid fa-eye"></i> </button>' +
                                 '<button type="button" class="btn btn-danger btnEliminar" data-id="' + row.IdFacturaVenta + '"> <i class="fas fa-solid fa-trash"></i> </button>' +
+                                '<button type="button" class="btn btn-secondary btnImprimir" data-id="' + row.NumeroFactura + '"> <i class="fas fa-solid fa-print"></i> </button>' +
                                 '</div>';
                         }
                     }

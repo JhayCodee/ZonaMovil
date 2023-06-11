@@ -85,6 +85,9 @@
     <Compile Include="Proveedor.cs">
       <DependentUpon>ZMModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="spBuscarFacturaVentaPorRangoFechas_Result.cs">
+      <DependentUpon>ZMModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="spDetalleFacturaVenta_Result.cs">
       <DependentUpon>ZMModel.tt</DependentUpon>
     </Compile>

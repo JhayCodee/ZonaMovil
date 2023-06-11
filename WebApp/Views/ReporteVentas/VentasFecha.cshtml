@@ -1,0 +1,145 @@
+﻿
+@{
+    ViewBag.Title = "VentasFecha";
+}
+
+
+<div id="VentasPorFechasContainer">
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 bg-primary">
+            <h6 class="m-0 font-weight-bold text-white">Buscar Ventas por Fechas</h6>
+        </div>
+
+        <div class="card-body">
+
+            <div class="row mb-4">
+                <div class="col-auto">
+                    <label for="NombreProducto">Seleccione un rango de fechas</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control w-auto" name="VentasPorFechasDTP" id="VentasPorFechasDTP" value="06/04/2023 - 06/04/2023" readonly />
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="button" id="btnBuscarRangoFecha">Buscar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped" id="tablaVentasPorFechas" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Numero Factura</th>
+                            <th>Cliente</th>
+                            <th>Fecha</th>
+                            <th>Impuesto</th>
+                            <th>Total</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Numero Factura</th>
+                            <th>Cliente</th>
+                            <th>Fecha</th>
+                            <th>Impuesto</th>
+                            <th>Total</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Ventana modal -->
+<div class="modal fade" id="detalleFacturaVentaModal" tabindex="-1" role="dialog" aria-labelledby="detalleFacturaVentaModalLabel" aria-hidden="true" style="display:none;">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="detalleFacturaVentaModalLabel">Detalles de la Factura</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" class="form-control" id="detalleIdProducto" name="detalleIdProducto" placeholder="" value="">
+                <div class="row">
+                    <div class="form-group col-4">
+                        <label for="detalleNumeroFactura">Numero Factura</label>
+                        <input type="text" class="form-control" id="detalleNumeroFactura" name="detalleNumeroFactura" placeholder="Numero Factura" value="" readonly>
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="detalleCliente">Cliente</label>
+                        <input type="text" class="form-control" id="detalleCliente" name="detalleCliente" placeholder="Modelo" value="" readonly>
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="detalleCedula">Cedula</label>
+                        <input type="text" class="form-control" id="detalleCedula" name="detalleCedula" placeholder="Cedula" value="" readonly>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-4">
+                        <label for="detalleTelefono">Telefono</label>
+                        <input type="number" class="form-control" id="detalleTelefono" name="detalleTelefono" placeholder="Telefono" value="" readonly>
+                    </div>
+
+                    <div class="form-group col-4">
+                        <label for="detalleFecha">Fecha</label>
+                        <input type="text" class="form-control" id="detalleFecha" name="detalleFecha" placeholder="Fecha" readonly>
+                    </div>
+
+                    <div class="form-group col-4">
+                        <label for="detalletotal">Total</label>
+                        <input type="text" class="form-control" id="detalletotal" name="detalletotal" placeholder="Total" readonly>
+                    </div>
+
+                </div>
+
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Vendido</h6>
+                            </div>
+                            <div class="card-body ">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="tablaFacturasPVendidos" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>Producto</th>
+                                                <th>Modelo</th>
+                                                <th>PrecioVenta</th>
+                                                <th>Cantidad</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script src="~/Scripts/VistasJS/Reportes/VentasPorFecha/ventasPorFecha.js"></script>
+}
+

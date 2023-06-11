@@ -39,3 +39,8 @@ input.error {
 input.valid {
     border-color: green;
 }
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #E6F4F9;
+}
+

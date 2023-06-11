@@ -55,6 +55,9 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Rotativa, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rotativa.1.7.3\lib\net461\Rotativa.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -130,6 +133,7 @@
     <Compile Include="Controllers\MarcaController.cs" />
     <Compile Include="Controllers\ProductoController.cs" />
     <Compile Include="Controllers\ProveedorController.cs" />
+    <Compile Include="Controllers\reportes\ReporteVentasController.cs" />
     <Compile Include="Controllers\VentasController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -139,6 +143,7 @@
   <ItemGroup>
     <Content Include="Content\css\sb-admin-2.css" />
     <Content Include="Content\css\sb-admin-2.min.css" />
+    <Content Include="Content\img\logozm.png" />
     <Content Include="Content\img\undraw_posting_photo.svg" />
     <Content Include="Content\img\undraw_profile.svg" />
     <Content Include="Content\img\undraw_profile_1.svg" />
@@ -150,6 +155,10 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="libman.json" />
+    <Content Include="Rotativa\help-wkhtmltoimage.txt" />
+    <Content Include="Rotativa\help-wkhtmltopdf.txt" />
+    <Content Include="Rotativa\wkhtmltoimage.exe" />
+    <Content Include="Rotativa\wkhtmltopdf.exe" />
     <Content Include="Scripts\bootstrap\js\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap\js\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap\js\bootstrap.js" />
@@ -1835,6 +1844,8 @@
     <Content Include="Scripts\js\demo\datatables-demo.js" />
     <Content Include="Scripts\js\sb-admin-2.js" />
     <Content Include="Scripts\js\sb-admin-2.min.js" />
+    <Content Include="Scripts\libs\DateRangePicker\daterangepicker.css" />
+    <Content Include="Scripts\libs\DateRangePicker\dateRangePicker.js" />
     <Content Include="Scripts\libs\inputmask\inputmask.js" />
     <Content Include="Scripts\libs\moment\moment.js" />
     <Content Include="Scripts\swal\swal.js" />
@@ -1848,6 +1859,7 @@
     <Content Include="Scripts\VistasJS\Producto\Validaciones.js" />
     <Content Include="Scripts\VistasJS\Proveedor\Index.js" />
     <Content Include="Scripts\VistasJS\Proveedor\Validaciones.js" />
+    <Content Include="Scripts\VistasJS\Reportes\VentasPorFecha\ventasPorFecha.js" />
     <Content Include="Scripts\VistasJS\Ventas\Ventas.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -1868,12 +1880,14 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Reportes\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="App_Browsers\qt.browser" />
     <None Include="packages.config" />
     <Content Include="Scripts\bootstrap\js\bootstrap.bundle.js.map" />
     <Content Include="Scripts\bootstrap\js\bootstrap.bundle.min.js.map" />
@@ -2029,6 +2043,10 @@
     <Content Include="Views\Proveedor\Index.cshtml" />
     <Content Include="Views\Marca\Index.cshtml" />
     <Content Include="Views\Ventas\Index.cshtml" />
+    <Content Include="Views\ReporteVentas\VentasFecha.cshtml" />
+    <Content Include="Views\ReporteVentas\prueba.cshtml" />
+    <Content Include="Views\ReporteVentas\ReporteDeVentasPorFechas.cshtml" />
+    <Content Include="Views\Ventas\FacturaVentaTemplate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Logica\Logica.csproj">

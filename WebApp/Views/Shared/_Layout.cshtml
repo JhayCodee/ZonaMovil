@@ -17,6 +17,7 @@
     <!-- Custom styles for this template-->
     <link href="~/Content/css/sb-admin-2.min.css" rel="stylesheet">
     <link href="~/Scripts/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="~/Scripts/libs/DateRangePicker/daterangepicker.css" rel="stylesheet" />
     @*<link href="~/Scripts/datatables/extensiones/css/buttons.dataTables.min.css" rel="stylesheet">*@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.min.css">
@@ -61,73 +62,62 @@
                 Inventario
             </div>
 
+            <!-- Nav Item - Utilities Collapse Menu -->
+            <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link" href="@Url.Action("Index","Producto")">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Productos</span>
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInventory"
+                   aria-expanded="true" aria-controls="collapseInventory">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>Inventario</span>
                 </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="@Url.Action("Index","Categoria")">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Categoria</span>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="@Url.Action("Index","Marca")">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Marcas</span>
-                </a>
-            </li>
-
-
-            <li class="nav-item">
-                <a class="nav-link" href="@Url.Action("Index","Cliente")">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Clientes</span>
-                </a>
-            </li><!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                   aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Compras</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div id="collapseInventory" class="collapse" aria-labelledby="headingUtilities"
+                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="cards.html">Compras</a>
-                        <a class="collapse-item" href="cards.html">Historial de compras</a>
+                        <a class="collapse-item" href="@Url.Action("Index","Producto")">Productos</a>
+                        <a class="collapse-item" href="@Url.Action("Index","Cliente")">Cliente</a>
+                        <a class="collapse-item" href="@Url.Action("Index","Proveedor")">Proveedor</a>
+                        <a class="collapse-item" href="@Url.Action("Index","Categoria")">Categoria</a>
+                        <a class="collapse-item" href="@Url.Action("Index","Marca")">Marca</a>
                     </div>
                 </div>
             </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("Index","Ventas")">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Ventas</span>
+                </a>
+            </li> 
+            
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("Index","Home")">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Pedidos</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("Index","Home")">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Compras</span>
+                </a>
+            </li>
+
 
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                   aria-expanded="true" aria-controls="collapseUtilities">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSales"
+                   aria-expanded="true" aria-controls="collapseSales">
                     <i class="fas fa-fw fa-wrench"></i>
-                    <span>Ventas</span>
+                    <span>Reportes</span>
                 </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                <div id="collapseSales" class="collapse" aria-labelledby="headingSales"
                      data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="@Url.Action("Index","Ventas")">Ventas</a>
-                        <a class="collapse-item" href="utilities-border.html">Pedidos</a>
+                        <a class="collapse-item" href="@Url.Action("VentasFecha","ReporteVentas")">Ventas por Fechas</a>
                     </div>
                 </div>
             </li>
-
-
-
-            <li class="nav-item">
-                <a class="nav-link" href="@Url.Action("Index","Proveedor")">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Proveedor</span>
-                </a>
-            </li>
-
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -221,6 +211,7 @@
     <script src="~/Scripts/datatables/extensiones/js/dataTables.buttons.min.js"></script>
     <script src="~/Scripts/swal/swal.js"></script>
     <script src="~/Scripts/libs/moment/moment.js"></script>
+    <script src="~/Scripts/libs/DateRangePicker/dateRangePicker.js"></script>
     <script src="~/Scripts/libs/inputmask/inputmask.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>

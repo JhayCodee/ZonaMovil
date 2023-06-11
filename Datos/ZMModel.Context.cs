@@ -61,5 +61,31 @@ namespace Datos
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spDetalleFacturaVenta_Result>("spDetalleFacturaVenta", nfParameter);
         }
+    
+        public virtual ObjectResult<spBuscarFacturaVentaPorRangoFechas_Result> spBuscarFacturaVentaPorRangoFechas(Nullable<System.DateTime> f1, Nullable<System.DateTime> f2)
+        {
+            var f1Parameter = f1.HasValue ?
+                new ObjectParameter("f1", f1) :
+                new ObjectParameter("f1", typeof(System.DateTime));
+    
+            var f2Parameter = f2.HasValue ?
+                new ObjectParameter("f2", f2) :
+                new ObjectParameter("f2", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spBuscarFacturaVentaPorRangoFechas_Result>("spBuscarFacturaVentaPorRangoFechas", f1Parameter, f2Parameter);
+        }
+    
+        public virtual ObjectResult<spBuscarFacturaVentaPorRangoFechas_Result> spBuscarFacturaVentaPorRangoFechas1(Nullable<System.DateTime> f1, Nullable<System.DateTime> f2)
+        {
+            var f1Parameter = f1.HasValue ?
+                new ObjectParameter("f1", f1) :
+                new ObjectParameter("f1", typeof(System.DateTime));
+    
+            var f2Parameter = f2.HasValue ?
+                new ObjectParameter("f2", f2) :
+                new ObjectParameter("f2", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spBuscarFacturaVentaPorRangoFechas_Result>("spBuscarFacturaVentaPorRangoFechas1", f1Parameter, f2Parameter);
+        }
     }
 }

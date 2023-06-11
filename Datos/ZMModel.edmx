@@ -259,6 +259,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="spBuscarFacturaVentaPorRangoFechas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="f1" Type="date" Mode="In" />
+          <Parameter Name="f2" Type="date" Mode="In" />
+        </Function>
         <Function Name="spDetalleFacturaVenta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="nf" Type="int" Mode="In" />
         </Function>
@@ -664,7 +668,15 @@
           </FunctionImport>
           <FunctionImport Name="spInfoFacturaVenta" ReturnType="Collection(Contexto.spInfoFacturaVenta_Result)" />
           <FunctionImport Name="spDetalleFacturaVenta" ReturnType="Collection(Contexto.spDetalleFacturaVenta_Result)" >
-            <Parameter Name="nf" Mode="In" Type="Int32" />
+          <Parameter Name="nf" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spBuscarFacturaVentaPorRangoFechas" ReturnType="Collection(Contexto.spBuscarFacturaVentaPorRangoFechas_Result)">
+            <Parameter Name="f1" Mode="In" Type="DateTime" />
+            <Parameter Name="f2" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="spBuscarFacturaVentaPorRangoFechas1" ReturnType="Collection(Contexto.spBuscarFacturaVentaPorRangoFechas_Result)">
+            <Parameter Name="f1" Mode="In" Type="DateTime" />
+            <Parameter Name="f2" Mode="In" Type="DateTime" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="spObtenerDetalleProducto_Result">
@@ -703,6 +715,16 @@
           <Property Type="Int32" Name="Cantidad" Nullable="true" />
           <Property Type="Decimal" Name="Impuesto" Nullable="true" Precision="19" />
           <Property Type="Decimal" Name="Total" Nullable="true" Precision="19" />
+        </ComplexType>
+        <ComplexType Name="spBuscarFacturaVentaPorRangoFechas_Result">
+          <Property Type="Int32" Name="IdCliente" Nullable="true" />
+          <Property Type="Int32" Name="IdFacturaVenta" Nullable="false" />
+          <Property Type="Int32" Name="NumeroFactura" Nullable="true" />
+          <Property Type="String" Name="Cliente" Nullable="false" MaxLength="101" />
+          <Property Type="DateTime" Name="Fecha" Nullable="true" Precision="23" />
+          <Property Type="Decimal" Name="Impuesto" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="Total" Nullable="true" Precision="19" />
+          <Property Type="Boolean" Name="Activo" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -889,6 +911,33 @@
                 <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
                 <ScalarProperty Name="Impuesto" ColumnName="Impuesto" />
                 <ScalarProperty Name="Total" ColumnName="Total" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spBuscarFacturaVentaPorRangoFechas" FunctionName="Contexto.Store.spBuscarFacturaVentaPorRangoFechas">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Contexto.spBuscarFacturaVentaPorRangoFechas_Result">
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="IdFacturaVenta" ColumnName="IdFacturaVenta" />
+                <ScalarProperty Name="NumeroFactura" ColumnName="NumeroFactura" />
+                <ScalarProperty Name="Cliente" ColumnName="Cliente" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Impuesto" ColumnName="Impuesto" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spBuscarFacturaVentaPorRangoFechas1" FunctionName="Contexto.Store.spBuscarFacturaVentaPorRangoFechas">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Contexto.spBuscarFacturaVentaPorRangoFechas_Result">
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="IdFacturaVenta" ColumnName="IdFacturaVenta" />
+                <ScalarProperty Name="NumeroFactura" ColumnName="NumeroFactura" />
+                <ScalarProperty Name="Cliente" ColumnName="Cliente" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Impuesto" ColumnName="Impuesto" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

@@ -44,10 +44,13 @@
     <Compile Include="Categoria_VM.cs" />
     <Compile Include="Cliente_VM.cs" />
     <Compile Include="Consultas\DetalleFacturaVentaConProductos_VM.cs" />
+    <Compile Include="DetalleFacturaVentaAdd_VM.cs" />
+    <Compile Include="FacturaVenta_VM.cs" />
     <Compile Include="Marca_VM.cs" />
     <Compile Include="ProcedimientosAlmacenados\DetalleFacturaVenta_VM.cs" />
     <Compile Include="ProcedimientosAlmacenados\InfoFacturaVenta_VM.cs" />
     <Compile Include="ProcedimientosAlmacenados\ObtenerDetalleProducto_VM.cs" />
+    <Compile Include="ProcedimientosAlmacenados\spBuscarFacturaVentaPorRangoFechas_VM.cs" />
     <Compile Include="Producto_VM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Proveedor_VM.cs" />

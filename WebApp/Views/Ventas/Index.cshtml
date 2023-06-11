@@ -48,6 +48,8 @@
     <form id="FacturaVentaFormulario">
         <div class="row">
 
+            <input type="hidden" id="IdFacturaVenta" value="" />
+
             <div class="col-sm-12 col-md-8">
                 <div class="col-sm-12">
                     <div class="card shadow mb-4">
@@ -68,7 +70,7 @@
                 </div>
 
                 <div class="col-sm-12">
-                    <div class="card shadow mb-4" >
+                    <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Productos</h6>
                         </div>
@@ -118,23 +120,43 @@
                             <div class="row">
                                 <div class="form-group col-12">
                                     <label for="NombreProducto">SubTotal</label>
-                                    <input type="text" class="form-control" id="subtotalFv" name="subtotalFv" placeholder="" value="">
+                                    <input type="text" class="form-control" id="subtotalFv" name="subtotalFv" placeholder="" value="" readonly>
                                 </div>
                                 <div class="form-group col-12">
                                     <label for="NombreProducto">Impuesto</label>
-                                    <input type="text" class="form-control" id="ImpuestoFV" name="ImpuestoFV" placeholder="" value="">
+                                    <input type="text" class="form-control" id="ImpuestoFV" name="ImpuestoFV" placeholder="" value="" readonly>
                                 </div>
                                 <div class="form-group col-12">
                                     <label for="NombreProducto">Total</label>
-                                    <input type="text" class="form-control" id="TotalFV" name="TotalFV" placeholder="" value="">
+                                    <input type="text" class="form-control" id="TotalFV" name="TotalFV" placeholder="" value="" readonly>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <input type="checkbox" id="checkEfectivoFV" class="mr-2" aria-label="Checkbox for following text input">
+                                            <label class="m-0">Efectivo</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-sm-12">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <input type="checkbox" class="mr-2" id="checkTarjetaFV" aria-label="Checkbox for following text input">
+                                            <label class="m-0">Tarjeta</label>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-12 d-flex flex-row">
-                                            <button type="submit" id="btnGuardarCliente" class="btn btn-primary w-100">Facturar</button>
-                                            <button type="button" id="btnRegresarCliente" class="btn btn-danger w-100 ml-2">Cancelar</button>
+                                        <button type="submit" id="btnGuardarFV" class="btn btn-primary w-100">Facturar</button>
+                                        <button type="button" id="btnRegresarFV" class="btn btn-danger w-100 ml-2">Cancelar</button>
                                     </div>
                                 </div>
                             </div>
