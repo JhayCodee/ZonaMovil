@@ -1,8 +1,8 @@
-﻿using Datos;
+﻿using Datos; //se añade para poder referenciar a Capa Datos
 using Modelo;
+using System.Data.Entity;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -150,5 +150,8 @@ namespace Logica
                 return null;
             }
         }
+
+
+
     }
 }

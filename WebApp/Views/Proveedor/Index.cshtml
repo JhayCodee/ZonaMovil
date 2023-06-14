@@ -1,0 +1,90 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<div id="proveedorIndexContainer">
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Proveedores</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="TablaProveedor" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            @*<th>IdProveedor</th>*@
+                            <th>Nombre</th>
+                            <th>Telefono</th>
+                            <th>Correo</th>
+                            <th>Direccion</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            @*<th>IdProveedor</th>*@
+                            <th>Nombre</th>
+                            <th>Telefono</th>
+                            <th>Correo</th>
+                            <th>Direccion</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div id="proveedorFormularioContainer">
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Agregar Nuevo  Proveedor</h6>
+        </div>
+        <div class="card-body">
+            <form id="FormularioProveedor">
+                <input type="hidden" class="form-control" id="IdProveedor" name="IdProveedor" placeholder="" value="">
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label for="NombreProveedor">Nombre</label>
+                        <input type="text" class="form-control" id="NombreProveedor" name="Nombre" placeholder="Nombre" value="">
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="TelefonoProveedor">Telefono</label>
+                        <input type="tel" class="form-control" id="TelefonoProveedor" name="Telefono" placeholder="88888888" value="">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label for="CorreoProveedor">Correo</label>
+                        <input type="email" class="form-control" id="CorreoProveedor" name="Correo" placeholder="name@example.com" value="">
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="DireccionProveedor">Direccion</label>
+                        <input type="text" class="form-control" id="DireccionProveedor" name="Direccion" placeholder="Direccion" value="">
+                    </div>
+                </div>
+                <div class="col-12 d-flex justify-content-end">
+                    <button type="button" id="btnRegresarProveedor" class="btn btn-info">Volver</button>
+                    <button type="submit" id="btnGuardarProveedor" class="btn btn-primary ml-2">Guardar</button>
+                </div>
+            </form>
+        </div>
+        
+    </div>
+</div>
+
+
+@section scripts {
+    <script src="~/Scripts/VistasJS/Proveedor/Validaciones.js"></script>
+    <script src="~/Scripts/VistasJS/Proveedor/Index.js"></script>
+}
+
+
+

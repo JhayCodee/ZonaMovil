@@ -17,6 +17,7 @@ namespace WebApp.Controllers
             marcaLN = new Marca_LN();
         }
 
+
         // GET: Marca
         public ActionResult Index()
         {
@@ -40,7 +41,7 @@ namespace WebApp.Controllers
                 return Json(new { error = errorMsj }, JsonRequestBehavior.AllowGet);
             }
         }
-        
+
         // BUSCAR MARCA POR ID
         [HttpGet]
         public JsonResult BuscarMarcaPorID(int id)
@@ -102,5 +103,6 @@ namespace WebApp.Controllers
                 return Json(new { success = false, message = mensaje });
             }
         }
+
     }
 }
