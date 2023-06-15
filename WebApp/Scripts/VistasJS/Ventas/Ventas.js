@@ -15,6 +15,7 @@ ComponenteFacturaVenta = {
 
 $("#tablaFacturasVentas").on('click', '.btnVer', function () {
     var id = $(this).data('id');
+    limpiarModal();
     $("#detalleFacturaVentaModal").modal("show");
     $.ajax({
         url: "/Ventas/ListarDetalleFacturaVenta",
@@ -24,8 +25,6 @@ $("#tablaFacturasVentas").on('click', '.btnVer', function () {
 
             var data = response.data;
             var d = data[0];
-
-            console.log(d);
 
             $("#detalleNumeroFactura").val(d.NumeroFactura);
             $("#detalleCliente").val(d.Cliente);
@@ -51,7 +50,6 @@ $("#tablaFacturasVentas").on('click', '.btnVer', function () {
         }
     });
 });
-
 
 $("#tablaFacturasVentas").on('click', '.btnImprimir', function () {
     var nf = $(this).data('id');
@@ -426,4 +424,13 @@ function cargarTablaFacturaVenta() {
             console.log("Error al obtener las facturas.");
         }
     });
+}
+
+
+function limpiarModal() {
+    // limpia todos los campos de entrada
+    $('#detalleFacturaVentaModal input[type="text"], #detalleFacturaVentaModal input[type="number"]').val('');
+
+    // limpia la tabla
+    $('#tablaFacturasPVendidos tbody').empty();
 }

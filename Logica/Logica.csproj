@@ -50,6 +50,8 @@
   <ItemGroup>
     <Compile Include="Categoria_LN.cs" />
     <Compile Include="Cliente_LN.cs" />
+    <Compile Include="Compras\FacturaCompra_LN.cs" />
+    <Compile Include="Compras\ReporteCompras_LN.cs" />
     <Compile Include="Marca_LN.cs" />
     <Compile Include="Producto_LN.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -71,8 +73,6 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Compras\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

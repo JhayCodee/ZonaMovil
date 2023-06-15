@@ -129,6 +129,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CategoriaController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
+    <Compile Include="Controllers\ComprasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MarcaController.cs" />
     <Compile Include="Controllers\ProductoController.cs" />
@@ -1853,6 +1854,7 @@
     <Content Include="Scripts\VistasJS\Categoria\Validaciones.js" />
     <Content Include="Scripts\VistasJS\Cliente\Index.js" />
     <Content Include="Scripts\VistasJS\Cliente\Validaciones.js" />
+    <Content Include="Scripts\VistasJS\Compras\facturaCompra.js" />
     <Content Include="Scripts\VistasJS\Marca\Index.js" />
     <Content Include="Scripts\VistasJS\Marca\Validaciones.js" />
     <Content Include="Scripts\VistasJS\Producto\Producto.js" />
@@ -2047,6 +2049,7 @@
     <Content Include="Views\ReporteVentas\prueba.cshtml" />
     <Content Include="Views\ReporteVentas\ReporteDeVentasPorFechas.cshtml" />
     <Content Include="Views\Ventas\FacturaVentaTemplate.cshtml" />
+    <Content Include="Views\Compras\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Logica\Logica.csproj">

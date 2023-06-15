@@ -1,0 +1,255 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+<div id="facturaCompraTablaContainer">
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 bg-primary">
+            <h6 class="m-0 font-weight-bold text-white">Facturas de Compras</h6>
+        </div>
+        <div class="card-body ">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="tablaFacturaCompra" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>NumeroFactura</th>
+                            <th>Proveedor</th>
+                            <th>Fecha</th>
+                            <th>Total</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>NumeroFactura</th>
+                            <th>Proveedores</th>
+                            <th>Fecha</th>
+                            <th>Total</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Ventana modal -->
+<div class="modal fade" id="detalleFacturaCompraModal" tabindex="-1" role="dialog" aria-labelledby="detalleFacturaCompraModal" aria-hidden="true" style="display:none;">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-white bg-primary">
+                <h5 class="modal-title" id="detalleFacturaVentaModalLabel">Detalles de la Factura</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="text-white">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @*<input type="hidden" class="form-control" id="detalleIdProducto" name="detalleIdProducto" placeholder="" value="">*@
+                <div class="row">
+                    <div class="form-group col-4">
+                        <label for="detalleNumeroFactura">Numero Factura</label>
+                        <input type="text" class="form-control" id="detalleNumeroFactura" name="detalleNumeroFactura" placeholder="Numero Factura" value="" readonly>
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="detalleProveedor">Proveedor</label>
+                        <input type="text" class="form-control" id="detalleProveedor" name="detalleProveedor" placeholder="Modelo" value="" readonly>
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="detalleTelefono">Telefono</label>
+                        <input type="number" class="form-control" id="detalleTelefono" name="detalleTelefono" placeholder="Telefono" value="" readonly>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-4">
+                        <label for="detalleFecha">Fecha</label>
+                        <input type="text" class="form-control" id="detalleFecha" name="detalleFecha" placeholder="Fecha" readonly>
+                    </div>
+
+                    <div class="form-group col-4">
+                        <label for="detalletotal">Total</label>
+                        <input type="text" class="form-control" id="detalletotal" name="detalletotal" placeholder="Total" readonly>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Vendido</h6>
+                            </div>
+                            <div class="card-body ">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="tablaFacturasPComprados" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>Producto</th>
+                                                <th>Modelo</th>
+                                                <th>PrecioVenta</th>
+                                                <th>Cantidad</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Nueva Facturacion -->
+
+<div id="FacturaCompraFormularioContainer" style="display: none;">
+
+    <form id="FacturaCompraFormulario">
+        <div class="row">
+
+            <input type="hidden" id="IdFacturaCompra" value="" />
+
+            <div class="col-sm-12 col-md-8">
+
+                <div class="col-sm-12">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Informacion del Proveedor</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form-group col-6">
+                                    <label for="ProveedorSelectPickFC">Proveedor</label>
+                                    <select class="form-control selectpicker dropdown-menu-down" id="ProveedorSelectPickFC" data-live-search="true" data-placement="bottom" name="ProveedorSelectPickFC">
+                                        <option value="">Seleccionar Proveedor</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Productos</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form-group col-6">
+                                    <label for="productoSelectFC">Seleccione un producto</label>
+                                    <select class="form-control selectpicker dropdown-menu-down" id="productoSelectFC" data-live-search="true" data-placement="bottom" name="productoSelectFC">
+                                        <option value="">Seleccionar Producto</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-2">
+                                    <label for="cantidadProdFc">Cantidad</label>
+                                    <input type="number" class="form-control" id="cantidadProdFc" name="cantidadProdFc" min="1">
+                                </div>
+                                <div class="form-group col-4 d-flex align-items-end">
+                                    <button type="button" class="btn btn-info" id="addProductoFC">Agregar</button>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="tablaFacturaCompraProductos" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Producto</th>
+                                            <th>Modelo</th>
+                                            <th>PrecioVenta</th>
+                                            <th>Cantidad</th>
+                                            <th>Accion</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-12 col-md-4">
+
+                <div class="col-sm-12">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Facturar</h6>
+                        </div>
+                        <div class="card-body">
+
+                            <div class="row">
+                                <div class="form-group col-12">
+                                    <label for="subtotalFc">SubTotal</label>
+                                    <input type="text" class="form-control" id="subtotalFc" name="subtotalFc" placeholder="" value="" readonly>
+                                </div>
+                                <div class="form-group col-12">
+                                    <label for="ImpuestoFc">Impuesto</label>
+                                    <input type="text" class="form-control" id="ImpuestoFc" name="ImpuestoFc" placeholder="" value="" readonly>
+                                </div>
+                                <div class="form-group col-12">
+                                    <label for="TotalFc">Total</label>
+                                    <input type="text" class="form-control" id="TotalFc" name="TotalFc" placeholder="" value="" readonly>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <input type="checkbox" id="checkEfectivoFc" class="mr-2" aria-label="Checkbox for following text input">
+                                            <label class="m-0">Efectivo</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <input type="checkbox" class="mr-2" id="checkTarjetaFc" aria-label="Checkbox for following text input">
+                                            <label class="m-0">Tarjeta</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-12 d-flex flex-row">
+                                        <button type="submit" id="btnGuardarFc" class="btn btn-primary w-100">Facturar</button>
+                                        <button type="button" id="btnRegresarFc" class="btn btn-danger w-100 ml-2">Cancelar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+
+
+
+@section scripts {
+    <script src="~/Scripts/VistasJS/Compras/facturaCompra.js"></script>
+}
+
+
