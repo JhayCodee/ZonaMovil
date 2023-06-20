@@ -53,6 +53,7 @@
     <Compile Include="Compras\FacturaCompra_LN.cs" />
     <Compile Include="Compras\ReporteCompras_LN.cs" />
     <Compile Include="Marca_LN.cs" />
+    <Compile Include="Pedidos\Pedido_LN.cs" />
     <Compile Include="Producto_LN.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Proveedor_LN.cs" />

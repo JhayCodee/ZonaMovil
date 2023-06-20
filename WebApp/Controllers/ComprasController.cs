@@ -24,20 +24,20 @@ namespace WebApp.Controllers
             { FileName = $"Factura-{numeroFactura}.pdf" };
         }
 
-        public ActionResult FacturaVentaTemplate(int numeroFactura)
-        {
-            ImprimirFactura_VM f = new ImprimirFactura_VM();
-            string errorMessage = string.Empty;
+        //public ActionResult FacturaVentaTemplate(int numeroFactura)
+        //{
+        //    ImprimirFactura_VM f = new ImprimirFactura_VM();
+        //    string errorMessage = string.Empty;
 
-            if (new ReporteVentas_LN().ImprimirFactura(numeroFactura, ref errorMessage, ref f))
-            {
-                return View(f);
-            }
-            else
-            {
-                return View();
-            }
-        }
+        //    if (new ReporteVentas_LN().ImprimirFactura(numeroFactura, ref errorMessage, ref f))
+        //    {
+        //        return View(f);
+        //    }
+        //    else
+        //    {
+        //        return View();
+        //    }
+        //}
 
 
 

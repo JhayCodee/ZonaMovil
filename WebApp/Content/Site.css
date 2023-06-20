@@ -44,3 +44,22 @@ input.valid {
     background-color: #E6F4F9;
 }
 
+.sidebar {
+    transition: width 0.5s ease; /* Ajusta la duración y la función de suavizado según tus necesidades */
+}
+
+.collapse {
+    transition: height 0.5s ease !important;
+}
+
+.collapse > * {
+    transition: all 0.5s ease-in-out;
+    transform: scale(0.95);
+    opacity: 0;
+}
+
+.collapse.show > * {
+    transform: scale(1);
+    opacity: 1;
+}
+
