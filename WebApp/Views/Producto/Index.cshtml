@@ -7,8 +7,8 @@
 <div id="ProductoTablaContainer">
 
     <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Productos</h6>
+        <div class="card-header py-3 bg-primary">
+            <h6 class="m-0 font-weight-bold text-light">Productos</h6>
         </div>
         <div class="card-body ">
             <div class="table-responsive">
@@ -47,61 +47,84 @@
 <div id="ProductoFormularioContainer" style="display: none;">
 
     <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Agregar Nuevo  Producto</h6>
+        <div class="card-header py-3 bg-primary">
+            <h6 class="m-0 font-weight-bold text-light">Agregar Nuevo  Producto</h6>
         </div>
         <div class="card-body">
             <form id="FormularioProducto">
                 <input type="hidden" class="form-control" id="IdProducto" name="IdProducto" placeholder="" value="">
                 <div class="row">
-                    <div class="form-group col-6">
+                    <div class="form-group col-sm-12 col-md-6">
                         <label for="NombreProducto">Nombre</label>
-                        <input type="text" class="form-control" id="NombreProducto" name="Nombre" placeholder="NombreProducto" value="">
+                        <input type="text" class="form-control" id="NombreProducto" name="Nombre" value="">
                     </div>
-                    <div class="form-group col-6">
+                    <div class="form-group col-sm-12 col-md-6">
                         <label for="ModeloProducto">Modelo</label>
-                        <input type="text" class="form-control" id="ModeloProducto" name="Modelo" placeholder="Modelo" value="">
+                        <input type="text" class="form-control" id="ModeloProducto" name="Modelo" value="">
                     </div>
                 </div>
                 <div class="row">
-                    <div class="form-group col-6">
-                        <label for="StockProducto">Stock</label>
-                        <input type="number" class="form-control" id="StockProducto" name="Stock" placeholder="0" value="">
+                    <div class="form-group col-sm-12 col-md-6">
+                        <label for="AlmacenamientoProducto">Almacenamiento</label>
+                        <input type="number" class="form-control" id="AlmacenamientoProducto" name="AlmacenamientoProducto" value="">
                     </div>
-                    <div class="form-group col-6">
-                        <label for="StockProducto">Garantia (Meses)</label>
-                        <input type="number" class="form-control" id="GarantiaProducto" name="GarantiaEnMeses" placeholder="0" value="">
+                    <div class="form-group col-sm-12 col-md-6">
+                        <label for="RAMProducto">Memoria RAM</label>
+                        <input type="number" class="form-control" id="RAMProducto" name="RAMProducto" value="">
                     </div>
                 </div>
+
                 <div class="row">
-                    <div class="form-group col-6">
+                    <div class="form-group col-sm-12 col-md-4">
                         <label for="StockProducto">Marca</label>
                         <select class="form-control selectpicker dropdown-menu-down" id="MarcaSelect" data-live-search="true" data-placement="bottom" name="IdMarca">
                             <option value="">Seleccionar categoría</option>
                         </select>
                         <input type="hidden" id="MarcaIdInput" name="categoriaId">
                     </div>
-                    <div class="form-group col-6">
+                    <div class="form-group col-sm-12 col-md-4">
                         <label for="StockProducto">Categoria</label>
                         <select class="form-control selectpicker dropdown-menu-down" id="categoriaSelect" data-live-search="true" data-placement="bottom" name="IdCategoria">
                             <option value="">Seleccionar categoría</option>
                         </select>
                         <input type="hidden" id="categoriaIdInput" name="categoriaId">
                     </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-6">
-                        <label for="StockProducto">Precio de Compra</label>
-                        <input type="number" class="form-control" id="PrecioCompra" name="PrecioCompra" placeholder="0" value="">
-                    </div>
-                    <div class="form-group col-6">
-                        <label for="StockProducto">Precio de Venta</label>
-                        <input type="number" class="form-control" id="PrecioVenta" name="PrecioVenta" placeholder="0" value="">
+                    <div class="form-group col-sm-12 col-md-4">
+                        <label for="ColoresSelect">Color</label>
+                        <select class="form-control selectpicker dropdown-menu-down" id="ColoresSelect" data-live-search="true" data-placement="bottom" name="IdColor">
+                            <option value="" selected disabled>Seleccionar Color</option>
+                            <option value="Negro">Negro</option>
+                            <option value="Azul">Azul</option>
+                            <option value="Blanco">Blanco</option>
+                        </select>
+                        <input type="hidden" id="SelectColor" name="SelectColor">
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="form-group col-12">
+                    <div class="form-group col-sm-12 col-md-6">
+                        <label for="StockProducto">Stock</label>
+                        <input type="number" class="form-control" id="StockProducto" name="Stock" value="">
+                    </div>
+                    <div class="form-group col-sm-12 col-md-6">
+                        <label for="StockProducto">Garantia (Meses)</label>
+                        <input type="number" class="form-control" id="GarantiaProducto" name="GarantiaEnMeses" value="">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-sm-12 col-md-6">
+                        <label for="StockProducto">Precio de Compra</label>
+                        <input type="number" class="form-control" id="PrecioCompra" name="PrecioCompra" value="">
+                    </div>
+                    <div class="form-group col-sm-12 col-md-6">
+                        <label for="StockProducto">Precio de Venta</label>
+                        <input type="number" class="form-control" id="PrecioVenta" name="PrecioVenta" value="">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-sm-12">
                         <label for="exampleFormControlTextarea1">Descripcion</label>
                         <textarea class="form-control" id="DescripcionProducto" rows="3" name="Descripcion"></textarea>
                     </div>
@@ -119,6 +142,9 @@
     </div>
 
 </div>
+
+
+
 
 <!-- Ventana modal -->
 <div class="modal fade" id="detalleproductoModal" tabindex="-1" role="dialog" aria-labelledby="detalleproductoModalLabel" aria-hidden="true" style="display:none;">

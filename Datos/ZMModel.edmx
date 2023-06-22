@@ -115,6 +115,9 @@
           <Property Name="Activo" Type="bit" />
           <Property Name="PrecioCompra" Type="money" />
           <Property Name="PrecioVenta" Type="money" />
+          <Property Name="Almacenamiento" Type="int" />
+          <Property Name="RAM" Type="int" />
+          <Property Name="Color" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Proveedor">
           <Key>
@@ -462,6 +465,9 @@
           <NavigationProperty Name="DetalleFacturaVenta" Relationship="Self.FK_DetalleFacturaVenta_Producto" FromRole="Producto" ToRole="DetalleFacturaVenta" />
           <NavigationProperty Name="DetallePedidoVenta" Relationship="Self.FK_DetallePedidoVenta_Producto" FromRole="Producto" ToRole="DetallePedidoVenta" />
           <NavigationProperty Name="Marca" Relationship="Self.FK_Producto_Marca" FromRole="Producto" ToRole="Marca" />
+          <Property Name="Almacenamiento" Type="Int32" />
+          <Property Name="RAM" Type="Int32" />
+          <Property Name="Color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Proveedor">
           <Key>
@@ -839,6 +845,9 @@
           <EntitySetMapping Name="Producto">
             <EntityTypeMapping TypeName="Contexto.Producto">
               <MappingFragment StoreEntitySet="Producto">
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="RAM" ColumnName="RAM" />
+                <ScalarProperty Name="Almacenamiento" ColumnName="Almacenamiento" />
                 <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Modelo" ColumnName="Modelo" />

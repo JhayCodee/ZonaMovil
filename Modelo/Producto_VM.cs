@@ -19,5 +19,8 @@ namespace Modelo
         public Nullable<bool> Activo { get; set; }
         public Nullable<decimal> PrecioCompra { get; set; }
         public Nullable<decimal> PrecioVenta { get; set; }
+        public Nullable<int> Almacenamiento { get; set; }
+        public Nullable<int> RAM { get; set; }
+        public string Color { get; set; }
     }
 }

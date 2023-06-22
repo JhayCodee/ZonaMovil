@@ -28,6 +28,7 @@
             type: 'POST',
             data: { id: producto },
             success: function (producto) {
+                console.log(producto);
                 // Poblar el formulario con la información del cliente
                 $("#IdProducto").val(producto.IdProducto);
                 $('#NombreProducto').val(producto.Nombre);
@@ -37,6 +38,8 @@
                 $('#PrecioCompra').val(producto.PrecioCompra);
                 $('#PrecioVenta').val(producto.PrecioVenta);
                 $('#DescripcionProducto').val(producto.Descripcion);
+                $('#RAMProducto').val(producto.RAM);
+                $('#AlmacenamientoProducto').val(producto.Almacenamiento);
 
                 //poblar los selectpicker
                 
@@ -50,6 +53,11 @@
                 $('#MarcaSelect').val(producto.IdMarca);
                 // Actualizar el selectpicker de marca
                 $('#MarcaSelect').selectpicker('refresh');
+
+                // Seleccionar la opción correspondiente al ID de marca del producto
+                $('#ColoresSelect').val(producto.Color);
+                // Actualizar el selectpicker de marca
+                $('#ColoresSelect').selectpicker('refresh');
 
                 // Mostrar el formulario
                 vistaProductoComponente.contenedorTabla.hide();
@@ -128,6 +136,9 @@
                 PrecioCompra: $('#PrecioCompra').val(),
                 PrecioVenta: $('#PrecioVenta').val(),
                 Descripcion: $('#DescripcionProducto').val(),
+                Almacenamiento: $('#AlmacenamientoProducto').val(),
+                RAM: $('#RAMProducto').val(),
+                Color: $('#ColoresSelect').val(),
                 Activo: true
             };
 
@@ -313,7 +324,7 @@
                     ],
                     buttons: [
                         {
-                            text: 'Nuevo',
+                            text: 'Nuevo Producto',
                             className: 'btn btn-primary mb-2',
                             titleAttr: "Crear un nuevo registro",
                             // si se da click en el boton mostrar el formulario y ocultar la tabla
@@ -324,30 +335,6 @@
                                 vistaProductoComponente.contenedorFormulario.show();
                             }
 
-                        },
-                        {
-                            extend: 'excel',
-                            text: 'Exportar a Excel',
-                            className: 'btn btn-success mb-2',
-                            titleAttr: "Exportar a Excel"
-                        },
-                        {
-                            extend: 'pdf',
-                            text: 'Exportar a PDF',
-                            className: 'btn btn-danger mb-2',
-                            titleAttr: "Exportar a PDF"
-                        },
-                        {
-                            extend: 'csv',
-                            text: 'Exportar a CSV',
-                            className: 'btn btn-warning mb-2',
-                            titleAttr: "Exportar a CSV"
-                        },
-                        {
-                            extend: 'print',
-                            text: 'Imprimir',
-                            className: 'btn btn-info mb-2',
-                            titleAttr: "Imprimir"
                         },
                     ]
                 });

@@ -36,6 +36,9 @@ namespace Logica
                     Activo = p.Activo,
                     PrecioCompra = p.PrecioCompra,
                     PrecioVenta = p.PrecioVenta,
+                    RAM = p.RAM,
+                    Almacenamiento = p.Almacenamiento,
+                    Color = p.Color
 
                 }).Where(x => x.Activo == true)
                     .ToList();
@@ -65,7 +68,10 @@ namespace Logica
                     IdMarca = p.IdMarca,
                     PrecioCompra = p.PrecioCompra,
                     PrecioVenta = p.PrecioVenta,
-                    Activo = true
+                    Activo = true,
+                    Almacenamiento = p.Almacenamiento,
+                    RAM = p.RAM,
+                    Color = p.Color
                 };
 
                 _db.Producto.Add(producto);
@@ -96,6 +102,9 @@ namespace Logica
                     producto.IdMarca = p.IdMarca;
                     producto.PrecioCompra = p.PrecioCompra;
                     producto.PrecioVenta = p.PrecioCompra;
+                    producto.Almacenamiento = p.Almacenamiento;
+                    producto.RAM = p.RAM;
+                    producto.Color = p.Color;
 
                     _db.Entry(producto).State = EntityState.Modified;
                     _db.SaveChanges();
@@ -103,13 +112,13 @@ namespace Logica
                 }
                 else
                 {
-                    errMsg = "No se encontró el cliente con ID " + id;
+                    errMsg = "No se encontró el Producto con ID " + id;
                     return false;
                 }
             }
             catch (Exception ex)
             {
-                errMsg = "Error al editar el cliente: " + ex.Message;
+                errMsg = "Error al editar el Producto: " + ex.Message;
                 return false;
             }
         }
@@ -193,7 +202,10 @@ namespace Logica
                         IdMarca = p.IdMarca,
                         IdCategoria = p.IdCategoria,
                         PrecioCompra = p.PrecioCompra,
-                        PrecioVenta = p.PrecioVenta
+                        PrecioVenta = p.PrecioVenta,
+                        RAM = p.RAM,
+                        Almacenamiento = p.Almacenamiento,
+                        Color = p.Color
                     };
 
                     return Producto;

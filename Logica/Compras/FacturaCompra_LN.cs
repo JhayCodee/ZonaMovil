@@ -200,12 +200,5 @@ namespace Logica.Compras
 
         #endregion
 
-        /*
-            listatabla = nf, proveedor, fecha, impuesto, total, id
-
-            listaDetalle = nf, prove, tel, dir, correo, id, numerof, prod, cantidad precioCompra
-         
-         */
-
     }
 }

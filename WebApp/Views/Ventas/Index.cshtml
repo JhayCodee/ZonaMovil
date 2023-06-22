@@ -50,16 +50,15 @@
 
             <input type="hidden" id="IdFacturaVenta" value="" />
 
-            <div class="col-sm-12 col-md-8">
+            <div class="col-sm-12 col-md-9">
                 <div class="col-sm-12">
                     <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Informacion del Cliente</h6>
+                        <div class="card-header py-3 bg-primary">
+                            <h6 class="m-0 font-weight-bold text-white">Informacion del Cliente</h6>
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="form-group col-6">
-                                    <label for="clienteSelectFV">Cliente</label>
+                                <div class="form-group col-9">
                                     <select class="form-control selectpicker dropdown-menu-down" id="clienteSelectFV" data-live-search="true" data-placement="bottom" name="clienteSelectFV">
                                         <option value="">Seleccionar cliente</option>
                                     </select>
@@ -70,19 +69,18 @@
                 </div>
 
                 <div class="col-sm-12">
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Productos</h6>
+                    <div class="card shadow mb-4 ">
+                        <div class="card-header py-3 bg-primary">
+                            <h6 class="m-0 font-weight-bold text-white">Productos</h6>
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="form-group col-6">
-                                    <label for="productoSelectFV">Seleccione un producto</label>
+                                <div class="form-group col-9">
                                     <select class="form-control selectpicker dropdown-menu-down" id="productoSelectFV" data-live-search="true" data-placement="bottom" name="productoSelectFV">
                                         <option value="">Seleccionar Producto</option>
                                     </select>
                                 </div>
-                                <div class="form-group col-6 d-flex align-items-end">
+                                <div class="form-group col-3 d-flex align-items-end">
                                     <button type="button" class="btn btn-info" id="addProductoFV">Agregar</button>
                                 </div>
                             </div>
@@ -92,7 +90,10 @@
                                         <tr>
                                             <th>Producto</th>
                                             <th>Modelo</th>
-                                            <th>PrecioVenta</th>
+                                            <th>RAM</th>
+                                            <th>Almacenamiento</th>
+                                            <th>Precio Venta</th>
+                                            <th>Cantidad</th>
                                             <th>Accion</th>
                                         </tr>
                                     </thead>
@@ -108,12 +109,12 @@
 
             </div>
 
-            <div class="col-sm-12 col-md-4">
+            <div class="col-sm-12 col-md-3">
 
                 <div class="col-sm-12">
                     <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Facturar</h6>
+                        <div class="card-header py-3 bg-primary">
+                            <h6 class="m-0 font-weight-bold text-white">Facturar</h6>
                         </div>
                         <div class="card-body">
 

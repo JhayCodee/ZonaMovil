@@ -33,6 +33,9 @@ namespace Datos
         public Nullable<bool> Activo { get; set; }
         public Nullable<decimal> PrecioCompra { get; set; }
         public Nullable<decimal> PrecioVenta { get; set; }
+        public Nullable<int> Almacenamiento { get; set; }
+        public Nullable<int> RAM { get; set; }
+        public string Color { get; set; }
     
         public virtual Categoria Categoria { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

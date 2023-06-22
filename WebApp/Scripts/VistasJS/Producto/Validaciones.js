@@ -9,10 +9,14 @@
                 required: true
             },
             Stock: {
-                required: true
+                required: true,
+                number: true,
+                min: 0
             },
             GarantiaEnMeses: {
-                required: true
+                required: true,
+                number: true,
+                min: 0
             },
             IdMarca: {
                 required: true
@@ -21,12 +25,29 @@
                 required: true
             },
             PrecioCompra: {
-                required: true
+                required: true,
+                number: true,
+                min: 0.01
             },
             PrecioVenta: {
-                required: true
+                required: true,
+                number: true,
+                min: 0.01
             },
             Descripcion: {
+                required: true
+            },
+            AlmacenamientoProducto: {
+                required: true,
+                number: true,
+                min: 0
+            },
+            RAMProducto: {
+                required: true,
+                number: true,
+                min: 0
+            },
+            IdColor: {
                 required: true
             }
         },
@@ -38,10 +59,14 @@
                 required: "Ingrese el modelo del producto"
             },
             Stock: {
-                required: "Ingrese la cantidad en stock"
+                required: "Ingrese la cantidad en stock",
+                number: "Ingrese un valor numérico",
+                min: "El valor debe ser mayor o igual a 0"
             },
             GarantiaEnMeses: {
-                required: "Ingrese el periodo de garantía"
+                required: "Ingrese el periodo de garantía",
+                number: "Ingrese un valor numérico",
+                min: "El valor debe ser mayor o igual a 0"
             },
             IdMarca: {
                 required: "Seleccione una marca"
@@ -50,13 +75,30 @@
                 required: "Seleccione una categoría"
             },
             PrecioCompra: {
-                required: "Ingrese el precio de compra"
+                required: "Ingrese el precio de compra",
+                number: "Ingrese un valor numérico",
+                min: "El valor debe ser mayor a 0"
             },
             PrecioVenta: {
-                required: "Ingrese el precio de venta"
+                required: "Ingrese el precio de venta",
+                number: "Ingrese un valor numérico",
+                min: "El valor debe ser mayor a 0"
             },
             Descripcion: {
                 required: "Ingrese una descripción"
+            },
+            AlmacenamientoProducto: {
+                required: "Ingrese el Almacenamiento",
+                number: "Ingrese un valor numérico",
+                min: "El valor debe ser mayor o igual a 0"
+            },
+            RAMProducto: {
+                required: "Ingrese la memoria RAM",
+                number: "Ingrese un valor numérico",
+                min: "El valor debe ser mayor o igual a 0"
+            },
+            IdColor: {
+                required: "Seleccione un color"
             }
         },
         errorElement: "span",
@@ -98,7 +140,7 @@
     });
 
     // Manejar el evento change de los selectpicker para ocultar los mensajes de error
-    $('#MarcaSelect, #categoriaSelect').on('changed.bs.select', function () {
+    $('#MarcaSelect, #categoriaSelect, #ColoresSelect').on('focusout', function () {
         $(this).valid();
     });
 });
