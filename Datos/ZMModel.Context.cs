@@ -38,6 +38,8 @@ namespace Datos
         public virtual DbSet<PedidoVenta> PedidoVenta { get; set; }
         public virtual DbSet<Producto> Producto { get; set; }
         public virtual DbSet<Proveedor> Proveedor { get; set; }
+        public virtual DbSet<Rol> Rol { get; set; }
+        public virtual DbSet<Usuario> Usuario { get; set; }
     
         public virtual ObjectResult<spObtenerDetalleProducto_Result> spObtenerDetalleProducto(Nullable<int> idProducto)
         {
@@ -86,6 +88,15 @@ namespace Datos
                 new ObjectParameter("f2", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spBuscarFacturaVentaPorRangoFechas_Result>("spBuscarFacturaVentaPorRangoFechas1", f1Parameter, f2Parameter);
+        }
+    
+        public virtual ObjectResult<spDetalleFacturaVenta_Result> spDetalleFacturaVenta1(Nullable<int> nf)
+        {
+            var nfParameter = nf.HasValue ?
+                new ObjectParameter("nf", nf) :
+                new ObjectParameter("nf", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spDetalleFacturaVenta_Result>("spDetalleFacturaVenta1", nfParameter);
         }
     }
 }

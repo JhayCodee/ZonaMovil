@@ -57,6 +57,7 @@
     <Compile Include="Producto_LN.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Proveedor_LN.cs" />
+    <Compile Include="Seguridad\Usuarios_LN.cs" />
     <Compile Include="Ventas\FacturaVenta_LN.cs" />
     <Compile Include="Ventas\ReporteVentas_LN.cs" />
   </ItemGroup>

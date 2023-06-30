@@ -62,14 +62,19 @@ namespace Logica.Ventas
                         Cedula = f.Cliente.Cedula,
 
                         listaProducto = _db.DetalleFacturaVenta
-                                    .Where(d => d.IdFacturaVenta == f.IdFacturaVenta)
-                                    .Select(d => new DetalleFVImprimir
-                                    {
-                                        Producto = d.Producto.Nombre,
-                                        Cantidad = (int)d.Cantidad,
-                                        Precio = (decimal)d.Producto.PrecioVenta,
-                                        Modelo = d.Producto.Modelo
-                                    }).ToList()
+                                .Where(d => d.IdFacturaVenta == f.IdFacturaVenta)
+                                .Select(d => new DetalleFVImprimir
+                                {
+                                    Producto = d.Producto.Nombre,
+                                    Cantidad = d.Cantidad,
+                                    Precio = d.Producto.PrecioVenta,
+                                    Modelo = d.Producto.Modelo,
+                                    Almacenamiento = (int?)d.Producto.Almacenamiento,
+                                    RAM = d.Producto.RAM,
+                                    Color = d.Producto.Color, 
+                                    Garantia = d.Producto.GarantiaEnMeses
+                                }).ToList()
+
 
                     }).FirstOrDefault();
 

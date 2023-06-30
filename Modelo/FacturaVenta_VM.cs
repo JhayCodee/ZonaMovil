@@ -37,8 +37,12 @@ namespace Modelo
     {
         public string Producto { get; set; }
         public string Modelo { get; set; }
-        public int Cantidad { get; set; }
-        public decimal Precio { get; set; }
+        public string Color { get; set; }
+        public Nullable<int> Cantidad { get; set; }
+        public Nullable<int> RAM { get; set; }
+        public Nullable<int> Almacenamiento { get; set; }
+        public Nullable<int> Garantia { get; set; }
+        public Nullable<decimal> Precio { get; set; }
 
     }
 

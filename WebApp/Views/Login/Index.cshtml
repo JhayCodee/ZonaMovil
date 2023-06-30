@@ -1,0 +1,96 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="~/Content/css/login/login.css" rel="stylesheet">
+    <script>
+        window.onload = function () {
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+        };
+    </script>
+</head>
+<body>
+    <img class="wave" src="~/Content/img/wave.png">
+    <div class="container">
+        <div class="img">
+            <img src="~/Content/img/bg.svg">
+        </div>
+        <div class="login-content">
+            @using (Html.BeginForm("Index", "Login", FormMethod.Post))
+            {
+                <h2 class="title">Bienvenido</h2>
+                <div class="input-div one">
+                    <div class="i">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="div">
+                        <h5>Nombre de usuario</h5>
+                        <input type="text" class="input" id="username" name="username" required oninvalid="this.setCustomValidity('Por favor ingresa tu nombre de usuario')" oninput="this.setCustomValidity('')">
+                    </div>
+                </div>
+                <div class="input-div pass">
+                    <div class="i">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <div class="div">
+                        <h5>Contraseña</h5>
+                        <input type="password" class="input" id="password" name="password" required oninvalid="this.setCustomValidity('Por favor ingresa tu contraseña')" oninput="this.setCustomValidity('')">
+                    </div>
+                </div>
+                <input type="submit" class="btn" value="Login">
+            }
+        </div>
+    </div>
+
+    
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    @if (ViewBag.ErrorMessages != null)
+    {
+        <script>
+            var errors = @Html.Raw(Json.Encode(ViewBag.ErrorMessages));
+
+            for (var key in errors) {
+                if (errors.hasOwnProperty(key)) {
+                    swal("Error", errors[key], "error");
+                }
+            }
+        </script>
+    }
+
+    <script>
+        const inputs = document.querySelectorAll(".input");
+
+
+        function addcl() {
+            let parent = this.parentNode.parentNode;
+            parent.classList.add("focus");
+        }
+
+        function remcl() {
+            let parent = this.parentNode.parentNode;
+            if (this.value == "") {
+                parent.classList.remove("focus");
+            }
+        }
+
+
+        inputs.forEach(input => {
+            input.addEventListener("focus", addcl);
+            input.addEventListener("blur", remcl);
+        });
+
+    </script>
+</body>
+
+</html>

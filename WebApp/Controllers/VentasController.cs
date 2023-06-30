@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace WebApp.Controllers
 {
+    [Authorize]
     public class VentasController : Controller
     {
         private readonly FacturaVenta_LN ln;

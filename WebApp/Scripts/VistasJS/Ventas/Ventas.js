@@ -36,8 +36,10 @@ $("#tablaFacturasVentas").on('click', '.btnVer', function () {
             var tabla = "";
             for (var i = 0; i < data.length; i++) {
                 tabla += "<tr>";
-                tabla += "<td>" + data[i].Producto + "</td>";
+                tabla += "<td>" + data[i].Producto + ' - ' + data[i].Color + "</td>";
                 tabla += "<td>" + data[i].Modelo + "</td>";
+                tabla += "<td>" + data[i].RAM + "</td>";
+                tabla += "<td>" + data[i].Almacenamiento + "</td>";
                 tabla += "<td>" + data[i].PrecioVenta + "</td>";
                 tabla += "<td>" + data[i].Cantidad + "</td>";
                 tabla += "</tr>";
@@ -146,7 +148,7 @@ $('#addProductoFV').click(function () {
                     newRow.append('<td>' + (data.RAM ? data.RAM + ' GB' : '-') + '</td>');
                     newRow.append('<td>' + (data.Almacenamiento ? data.Almacenamiento + ' GB' : ' - ') + '</td>');
                     newRow.append('<td>' + data.PrecioVenta + '</td>');
-                    newRow.append('<td style="text-align: center;"><button type="button" class="btn btn-sm btn-primary decrement" style="margin-right: 10px;">-</button><span class="cantidad" style="margin: 0 10px;">1</span><button type="button" class="btn btn-sm btn-primary increment" style="margin-left: 10px;">+</button></td>');
+                    newRow.append('<td style="text-align: center;"><button type="button" class="btn btn-primary decrement" style="margin-right: 5px; padding: 3px 6px; font-size: 12px;">-</button><span class="cantidad" style="margin: 0 5px;">1</span><button type="button" class="btn btn-primary increment" style="margin-left: 5px; padding: 3px 6px; font-size: 12px;">+</button></td>');
                     newRow.append('<td><button type="button" class="btn btn-danger btn-sm eliminarPFV-btn"><i class="fas fa-trash"></i></button></td>');
                     newRow.append('<td class="stock" style="display: none;">' + data.Stock + '</td>');
                     newRow.append('<td style="display: none;">' + data.IdProducto + '</td>');

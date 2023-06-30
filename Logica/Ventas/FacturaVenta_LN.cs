@@ -97,10 +97,26 @@ namespace Logica.Ventas
                     fact.Activo = false;
                     _db.Entry(fact).State = EntityState.Modified;
                     _db.SaveChanges();
+
+                    // Obtener los detalles de la factura
+                    var detallesFactura = _db.DetalleFacturaVenta.Where(x => x.IdFacturaVenta == id).ToList();
+
+                    // Devolver los productos al stock
+                    foreach (var detalleFactura in detallesFactura)
+                    {
+                        var producto = _db.Producto.Find(detalleFactura.IdProducto);
+                        if (producto != null)
+                        {
+                            producto.Stock += detalleFactura.Cantidad;
+                            _db.Entry(producto).State = EntityState.Modified;
+                        }
+                    }
+
+                    _db.SaveChanges();
                 }
                 else
                 {
-                    errroMessgae = "Factura no encoontrada";
+                    errroMessgae = "Factura no encontrada";
                     return false;
                 }
 
@@ -112,6 +128,9 @@ namespace Logica.Ventas
                 return false;
             }
         }
+
+
+
 
         public bool ListarFacturas(ref List<InfoFacturaVenta_VM> listaFactura, ref string errorMessage)
         {
@@ -158,7 +177,11 @@ namespace Logica.Ventas
                     PrecioVenta = d.PrecioVenta,
                     Modelo = d.Modelo,
                     Impuesto = d.Impuesto,
-                    Total = d.Total
+                    Total = d.Total,
+                    RAM = d.RAM, 
+                    Almacenamiento = d.Almacenamiento, 
+                    Color = d.Color
+
                 })
                 .ToList();
 

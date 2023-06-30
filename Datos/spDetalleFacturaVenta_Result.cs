@@ -24,5 +24,8 @@ namespace Datos
         public Nullable<int> Cantidad { get; set; }
         public Nullable<decimal> Impuesto { get; set; }
         public Nullable<decimal> Total { get; set; }
+        public Nullable<int> Almacenamiento { get; set; }
+        public Nullable<int> RAM { get; set; }
+        public string Color { get; set; }
     }
 }

@@ -27,6 +27,9 @@
         <AssociationConnector Association="Contexto.FK_DetallePedidoVenta_Producto" ManuallyRouted="false" />
         <AssociationConnector Association="Contexto.FK_FacturaCompra_Proveedor" ManuallyRouted="false" />
         <AssociationConnector Association="Contexto.FK_Producto_Marca" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Contexto.Rol" Width="1.5" PointX="7.5" PointY="2.625" />
+        <EntityTypeShape EntityType="Contexto.Usuario" Width="1.5" PointX="9.875" PointY="1.875" />
+        <AssociationConnector Association="Contexto.FK__Usuario__IdRol__1B9317B3" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

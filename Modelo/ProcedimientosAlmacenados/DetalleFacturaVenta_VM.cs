@@ -15,8 +15,11 @@ namespace Modelo.ProcedimientosAlmacenados
         public Nullable<System.DateTime> Fecha { get; set; }
         public string Producto { get; set; }
         public string Modelo { get; set; }
+        public string Color { get; set; }
         public Nullable<decimal> PrecioVenta { get; set; }
         public Nullable<int> Cantidad { get; set; }
+        public Nullable<int> RAM { get; set; }
+        public Nullable<int> Almacenamiento { get; set; }
         public Nullable<decimal> Impuesto { get; set; }
         public Nullable<decimal> Total { get; set; }
     }

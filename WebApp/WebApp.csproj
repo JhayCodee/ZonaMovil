@@ -131,6 +131,7 @@
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\ComprasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MarcaController.cs" />
     <Compile Include="Controllers\PedidosController.cs" />
     <Compile Include="Controllers\ProductoController.cs" />
@@ -140,11 +141,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Permisos\PermisoRolAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\login\login.css" />
     <Content Include="Content\css\sb-admin-2.css" />
     <Content Include="Content\css\sb-admin-2.min.css" />
+    <Content Include="Content\img\bg.svg" />
     <Content Include="Content\img\logozm.png" />
     <Content Include="Content\img\undraw_posting_photo.svg" />
     <Content Include="Content\img\undraw_profile.svg" />
@@ -152,6 +156,7 @@
     <Content Include="Content\img\undraw_profile_2.svg" />
     <Content Include="Content\img\undraw_profile_3.svg" />
     <Content Include="Content\img\undraw_rocket.svg" />
+    <Content Include="Content\img\wave.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -2052,6 +2057,9 @@
     <Content Include="Views\ReporteVentas\ReporteDeVentasPorFechas.cshtml" />
     <Content Include="Views\Ventas\FacturaVentaTemplate.cshtml" />
     <Content Include="Views\Compras\Index.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Home\SinPerimiso.cshtml" />
+    <Content Include="Views\Home\SinPermiso.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Logica\Logica.csproj">

@@ -6,19 +6,21 @@ using System.Web.Mvc;
 using Logica;
 using Modelo;
 
+using WebApp.Permisos;
+
 namespace WebApp.Controllers
 {
+    [Authorize]
     public class ProveedorController : Controller
     {
         private readonly Proveedor_LN proveedorLN;
-
 
         public ProveedorController()
         {
             proveedorLN = new Proveedor_LN();
         }
 
-        // GET: Proveedor
+        [PermisoRol(Modelo.Seguridad.Rol_EN.Administrador)]
         public ActionResult Index()
         {
             return View();
@@ -100,8 +102,5 @@ namespace WebApp.Controllers
                 return Json(new { success = false, message = mensaje });
             }
         }
-
-
-
     }
 }

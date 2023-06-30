@@ -85,6 +85,39 @@
         .td-item {
             border-bottom: 2px solid #E8E8E8 !important;
         }
+
+
+        .producto-column {
+            width: 20%; /* Ajusta este valor a lo que necesites */
+        }
+
+        .modelo-column {
+            width: 20%; /* Ajusta este valor a lo que necesites */
+        }
+
+        .ram-column {
+            width: 10%; /* Ajusta este valor a lo que necesites */
+        }
+
+        .almacenamiento-column {
+            width: 10%; /* Ajusta este valor a lo que necesites */
+        }
+
+        .cantidad-column {
+            width: 10%; /* Ajusta este valor a lo que necesites */
+        }
+
+        .garantia-column {
+            width: 10%; /* Ajusta este valor a lo que necesites */
+        }
+
+        .precio-column {
+            width: 10%; /* Ajusta este valor a lo que necesites */
+        }
+
+        .total-column {
+            width: 10%; /* Ajusta este valor a lo que necesites */
+        }
     </style>
 </head>
 <body>
@@ -151,35 +184,48 @@
         <table class="tbproductos" style="width:100%">
             <thead>
                 <tr>
-                    <th class="tbth">Producto</th>
-                    <th class="tbth" style="width:130px">Cantidad</th>
-                    <th class="tbth" style="width:130px">Precio</th>
-                    <th class="tbth" style="width:130px">Total</th>
+                    <th class="tbth producto-column">Producto</th>
+                    <th class="tbth modelo-column">Modelo</th>
+                    <th class="tbth ram-column">RAM</th>
+                    <th class="tbth almacenamiento-column">Almacenamiento</th>
+                    <th class="tbth cantidad-column">Cantidad</th>
+                    <th class="tbth garantia-column">Garantia</th>
+                    <th class="tbth precio-column">Precio</th>
+                    <th class="tbth total-column">Total</th>
                 </tr>
             </thead>
             <tbody>
 
                 @foreach (var item in Model.listaProducto)
                 {
-                    decimal subtotal = item.Cantidad * item.Precio;
+                    decimal subtotal = 0m;
+                    if (item.Cantidad.HasValue && item.Precio.HasValue)
+                    {
+                        subtotal = item.Cantidad.Value * item.Precio.Value;
+                    }
+
                     totalSinImpuesto += subtotal;
 
                     <tr>
-                        <td class="td-item"><p class="item">@item.Producto</p></td>
+                        <td class="td-item"><p class="item">@((item.Producto ?? "-") + " - " + (item.Color ?? "-"))</p></td>
+                        <td class="td-item"><p class="item">@item.Modelo </p></td>
+                        <td class="td-item"><p class="item">@(item.RAM.HasValue ? item.RAM.Value.ToString() + "GB" : "-")</p></td>
+                        <td class="td-item"><p class="item">@(item.Almacenamiento.HasValue ? item.Almacenamiento.Value.ToString() + "GB" : "-")</p></td>
                         <td class="td-item"><p class="item">@item.Cantidad</p></td>
-                        <td class="td-item"><p class="item">@item.Precio.ToString("N2")</p></td>
+                        <td class="td-item"><p class="item">@(item.Garantia.HasValue ? item.Garantia.Value.ToString() : "0") Meses</p></td>
+                        <td class="td-item"><p class="item">@(item.Precio.HasValue ? item.Precio.Value.ToString("N2") + "$" : "N/A")</p></td>
                         <td style="background-color:#EDF6F9"><p class="item">@subtotal.ToString("N2") $</p></td>
                     </tr>
                 }
 
                 <tr>
-                    <td colspan="2" rowspan="3">
+                    <td colspan="6" rowspan="3">
                     </td>
                     <td class="td-item">
                         <p class="item-2">SubTotal</p>
                     </td>
                     <td class="item-3">
-                        <p>@totalSinImpuesto.ToString("N2")</p>
+                        <p>@totalSinImpuesto.ToString("N2")$</p>
                     </td>
                 </tr>
                 <tr>
@@ -187,7 +233,7 @@
                         <p class="item-2">IVA</p>
                     </td>
                     <td class="item-3">
-                        <p>@((totalSinImpuesto * 0.15m).ToString("N2"))</p>
+                        <p>@((totalSinImpuesto * 0.15m).ToString("N2"))$</p>
                     </td>
                 </tr>
                 <tr>
@@ -195,7 +241,7 @@
                         <p>Total</p>
                     </td>
                     <td class="item-3">
-                        <p>@((totalSinImpuesto * 0.15m + totalSinImpuesto).ToString("N2"))</p>
+                        <p>@((totalSinImpuesto * 0.15m + totalSinImpuesto).ToString("N2"))$</p>
                     </td>
                 </tr>
 
