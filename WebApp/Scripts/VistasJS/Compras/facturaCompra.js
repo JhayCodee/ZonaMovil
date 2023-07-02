@@ -42,7 +42,6 @@ function cargarTablaFacturaCompra() {
                             return '<div class="centrar" style="display:flex; justify-content:center; gap:6px;">' +
                                 '<button type="button" class="btn btn-info btnVer" data-id="' + row.NumeroFactura + '"> <i class="fas fa-solid fa-eye"></i> </button>' +
                                 '<button type="button" class="btn btn-danger btnEliminar" data-id="' + row.IdFacturaCompra + '"> <i class="fas fa-solid fa-trash"></i> </button>' +
-                                '<button type="button" class="btn btn-secondary btnImprimir" data-id="' + row.NumeroFactura + '"> <i class="fas fa-solid fa-print"></i> </button>' +
                                 '</div>';
                         }
                     }
@@ -90,16 +89,26 @@ function cargarSelectProductosFC() {
             var selectpicker = $('#productoSelectFC');
 
             // Limpiar las opciones existentes en el selectpicker
-            selectpicker.empty();
+            selectpicker.find('option').remove();
 
-            // Agregar la opción "Seleccionar Producto" deshabilitada y seleccionada por defecto
-            selectpicker.append('<option value="" disabled selected>Seleccionar Producto</option>');
+            // Agregar la opción "Seleccionar categoría" al principio de la lista
+            selectpicker.append('<option value="">Seleccionar producto</option>');
 
             // Agregar solo las opciones de productos con stock mayor a 0
             $.each(data, function (key, value) {
-                if (value.Stock > 0) {
-                    console.log(value);
-                    selectpicker.append('<option value="' + value.IdProducto + '">' + value.Nombre + '</option>');
+                if (value.Stock >= 0) {
+                    var optionText = value.Nombre;
+
+                    if (value.RAM != null) {
+                        optionText += ' - ' + value.RAM + 'GB RAM';
+                    }
+                    if (value.Almacenamiento != null) {
+                        optionText += ' - ' + value.Almacenamiento + 'GB Almacenamiento';
+                    }
+
+                    optionText += ' - ' + value.Color;
+
+                    selectpicker.append('<option value="' + value.IdProducto + '" data-stock="' + value.Stock + '">' + optionText + '</option>');
                 }
             });
 
@@ -112,6 +121,7 @@ function cargarSelectProductosFC() {
         }
     });
 }
+
 
 function cargarSelectProveedores() {
     $.ajax({
@@ -150,9 +160,9 @@ function actualizarValoresFacturaCompra() {
 
     // Recorrer las filas de la tabla y sumar los valores de PrecioVenta
     $('#tablaFacturaCompraProductos tbody tr').each(function () {
-        var precioVenta = parseFloat($(this).find('td:eq(2)').text());
-        var canti = parseFloat($(this).find('td:eq(3)').text());
-        subtotal += precioVenta * canti;
+        var precioVenta = parseFloat($(this).find('td:eq(4)').text());
+        var cantidad = parseInt($(this).find('td:eq(5) .cantidad').text());
+        subtotal += precioVenta * cantidad;  // multiplicamos por la cantidad para obtener el total por cada producto
     });
 
     // Calcular el impuesto
@@ -167,15 +177,94 @@ function actualizarValoresFacturaCompra() {
     $('#TotalFc').val(total.toFixed(2));
 }
 
+
+
+$("#tablaFacturaCompra").on('click', '.btnEliminar', function () {
+    var id = $(this).data('id');
+
+    // Mostrar Sweet Alert para confirmar la eliminación
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: "Esta acción eliminará la compra.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Realizar la eliminación del producto mediante una petición AJAX
+            $.ajax({
+                url: "/Compras/EliminarFacturaCompra",
+                type: 'POST',
+                data: { id: id },
+                success: function (response) {
+                    if (response.success) {
+                        // El producto se eliminó correctamente
+                        Swal.fire({
+                            title: 'Eliminado',
+                            text: response.message,
+                            icon: 'success'
+                        }).then(() => {
+                            // Actualizar la tabla o realizar otras acciones necesarias
+                            // por ejemplo, recargar la página:
+                            cargarTablaFacturaCompra();
+                        });
+                    } else {
+                        // Ocurrió un error al eliminar el producto
+                        Swal.fire('Error', response.message, 'error');
+                    }
+                },
+                error: function (xhr, status, error) {
+                    // Ocurrió un error en la petición AJAX
+                    Swal.fire('Error', 'Ocurrió un error en la petición.', 'error');
+                }
+            });
+        }
+    });
+});
+
+
+// Evento de clic para los botones de eliminar
+$(document).on('click', '.eliminarPFV-btn', function () {
+    // Obtener la fila a la que pertenece el botón
+    var row = $(this).closest('tr');
+
+    // Eliminar la fila de la tabla
+    row.remove();
+
+    // Actualizar los valores de SubTotal, Impuesto y Total
+    actualizarValoresFactura();
+});
+
 // Evento de clic para el botón "Agregar producto"
 $('#addProductoFC').click(function () {
     // Obtener el producto seleccionado del selectpicker
     var productoId = $('#productoSelectFC').val();
-    var cant = $('#cantidadProdFc').val()
-    console.log(productoId);
 
     // Verificar si se seleccionó un producto válido
     if (productoId) {
+        var productoYaAgregado = false;
+
+        // Recorremos las filas de la tabla para comprobar si el producto ya fue agregado
+        $('#tablaFacturaCompraProductos tbody tr').each(function () {
+            var idProductoEnTabla = $(this).find('td:last-child').text();
+            if (productoId === idProductoEnTabla) {
+                productoYaAgregado = true;
+                return false;  // esto detiene el bucle .each() en caso de que ya se haya encontrado el producto
+            }
+        });
+
+        if (productoYaAgregado) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Este producto ya ha sido agregado a la tabla. Por favor, seleccione otro producto.'
+            });
+            return;  // detenemos la ejecución de la función aquí si el producto ya fue agregado
+        }
+
         // Realizar la solicitud AJAX para obtener la información del producto
         $.ajax({
             url: '/Producto/BuscarProductoPorID',
@@ -184,16 +273,18 @@ $('#addProductoFC').click(function () {
             dataType: 'json',
             success: function (data) {
                 // Verificar si se obtuvo la información del producto correctamente
-                console.log(data);
                 if (data) {
                     // Crear una nueva fila en la tabla con los datos del producto obtenidos
                     var newRow = $('<tr>');
-                    newRow.append('<td>' + data.Nombre + '</td>');
+                    newRow.append('<td>' + data.Nombre + ' - ' + data.Color + '</td>');
                     newRow.append('<td>' + data.Modelo + '</td>');
-                    newRow.append('<td>' + data.PrecioCompra + '</td>');
-                    newRow.append('<td>' + cant + '</td>');
+                    newRow.append('<td>' + (data.RAM ? data.RAM + ' GB' : '-') + '</td>');
+                    newRow.append('<td>' + (data.Almacenamiento ? data.Almacenamiento + ' GB' : ' - ') + '</td>');
+                    newRow.append('<td>' + data.PrecioVenta + '</td>');
+                    newRow.append('<td style="text-align: center;"><button type="button" class="btn btn-primary decrement" style="margin-right: 5px; padding: 3px 6px; font-size: 12px;">-</button><span class="cantidad" style="margin: 0 5px;">1</span><button type="button" class="btn btn-primary increment" style="margin-left: 5px; padding: 3px 6px; font-size: 12px;">+</button></td>');
+                    newRow.append('<td><button type="button" class="btn btn-danger btn-sm eliminarPFV-btn"><i class="fas fa-trash"></i></button></td>');
+                    newRow.append('<td class="stock" style="display: none;">' + data.Stock + '</td>');
                     newRow.append('<td style="display: none;">' + data.IdProducto + '</td>');
-                    newRow.append('<td><button type="button" class="btn btn-danger btn-sm eliminarPFC-btn"><i class="fas fa-trash"></i></button></td>');
 
                     // Agregar la nueva fila a la tabla
                     $('#tablaFacturaCompraProductos tbody').append(newRow);
@@ -202,15 +293,18 @@ $('#addProductoFC').click(function () {
                     actualizarValoresFacturaCompra();
 
                     // Limpiar el selectpicker seleccionado
-                    $('#productoSelectFV').val('');
+                    $('#productoSelectFC').val('');
 
                     // Actualizar el selectpicker
                     cargarSelectProductosFC();
                 }
             },
             error: function (xhr, status, error) {
-                // Manejar errores
-                console.log(error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Ha ocurrido un error al buscar el producto: ' + error
+                });
             }
         });
     }
@@ -265,12 +359,18 @@ $("#tablaFacturaCompra").on('click', '.btnVer', function () {
     });
 });
 
+// Evento de envío del formulario
 $('#FacturaCompraFormulario').submit(function (event) {
     event.preventDefault(); // Evita el envío del formulario por defecto
 
+    // Verificar cliente, productos y método de pago
+    if (!verificarProveedorSeleccionado() || !verificarListaProductos() || !verificarMetodoPago()) {
+        return;
+    }
+
     // Obtener el método de pago seleccionado
     var metodoPago = "Efectivo"; // Valor predeterminado para Efectivo
-    if ($('#checkTarjetaFc').is(':checked')) {
+    if ($('#checkTarjetaFV').is(':checked')) {
         metodoPago = "Tarjeta"; // Cambiar a 1 si Tarjeta está seleccionada
     }
 
@@ -282,10 +382,10 @@ $('#FacturaCompraFormulario').submit(function (event) {
     var productos = [];
     $('#tablaFacturaCompraProductos tbody tr').each(function () {
         var producto = {
-            nombre: $(this).find('td:eq(0)').text(),
-            Cantidad: parseInt($(this).find('td:eq(3)').text()),
-            Precio: parseFloat($(this).find('td:eq(2)').text()),
-            IdProducto: parseFloat($(this).find('td:eq(4)').text())
+            Nombre: $(this).find('td:eq(0)').text(),
+            Precio: parseFloat($(this).find('td:eq(4)').text()) * parseFloat($(this).find('.cantidad').text()),
+            Cantidad: parseInt($(this).find('.cantidad').text()),
+            IdProducto: parseFloat($(this).find('td:eq(8)').text())
         };
         productos.push(producto);
     });
@@ -294,7 +394,6 @@ $('#FacturaCompraFormulario').submit(function (event) {
     var subtotal = parseFloat($('#subtotalFc').val());
     var impuesto = parseFloat($('#ImpuestoFc').val());
     var total = parseFloat($('#TotalFc').val());
-
 
     var factura = {
         IdProveedor: ProveedorId,
@@ -310,6 +409,7 @@ $('#FacturaCompraFormulario').submit(function (event) {
         dfv: productos
     };
 
+
     $.ajax({
         url: ComponenteFacturaCompra.url + '/AgregarFacturaCompra',
         type: 'POST',
@@ -318,13 +418,13 @@ $('#FacturaCompraFormulario').submit(function (event) {
         contentType: 'application/json',
         success: function (response) {
             Swal.fire(
-                'Agregado!',
-                'Este Producto se ha Agregado.',
+                'Facturado!',
+                'Esta factura se ha creado con exito!.',
                 'success'
             ).then(() => {
-                cargarTablaFacturaVenta();
-                ComponenteFacturaVenta.contenedorTabla.show();
-                ComponenteFacturaVenta.contenedorFormulario.hide();
+                cargarTablaFacturaCompra();
+                ComponenteFacturaCompra.contenedorTabla.show();
+                ComponenteFacturaCompra.contenedorFormulario.hide();
             });
         },
         error: function (xhr, status, error) {
@@ -334,3 +434,97 @@ $('#FacturaCompraFormulario').submit(function (event) {
     });
 
 });
+
+
+// Manejar el cambio en el checkbox "Efectivo"
+$('#checkEfectivoFc').change(function () {
+    if ($(this).is(':checked')) {
+        $('#checkTarjetaFc').prop('checked', false);
+    }
+});
+
+// Manejar el cambio en el checkbox "Tarjeta"
+$('#checkTarjetaFc').change(function () {
+    if ($(this).is(':checked')) {
+        $('#checkEfectivoFc').prop('checked', false);
+    }
+});
+
+$('#tablaFacturaCompraProductos').on('click', '.increment', function () {
+    var tr = $(this).closest('tr');
+    var cantidad = parseInt(tr.find('.cantidad').text());
+
+    tr.find('.cantidad').text(cantidad + 1);
+
+    // Actualizar los totales después de cambiar la cantidad
+    actualizarValoresFacturaCompra();
+});
+
+$('#tablaFacturaCompraProductos').on('click', '.decrement', function () {
+    var tr = $(this).closest('tr');
+    var cantidad = parseInt(tr.find('.cantidad').text());
+
+    // Asegúrate de que la cantidad no sea menor que 1
+    if (cantidad > 1) {
+        tr.find('.cantidad').text(cantidad - 1);
+
+        // Actualizar los totales después de cambiar la cantidad
+        actualizarValoresFactura();
+    }
+});
+
+function verificarProveedorSeleccionado() {
+    var Id = $('#ProveedorSelectPickFC').val();
+    if (Id === '' || Id === null) {
+        Swal.fire('Error!', 'Debes seleccionar un proveedor.', 'error');
+        return false;
+    }
+    return true;
+}
+
+// Verificar que la lista de productos no está vacía
+function verificarListaProductos() {
+    var numProductos = $('#tablaFacturaCompraProductos tbody tr').length;
+    if (numProductos === 0) {
+        Swal.fire('Error!', 'Debe haber al menos un producto en la lista.', 'error');
+        return false;
+    }
+    return true;
+}
+
+function verificarMetodoPago() {
+    if ($('#checkEfectivoFc').is(':checked') || $('#checkTarjetaFc').is(':checked')) {
+        return true;
+    }
+    Swal.fire('Error!', 'Debes seleccionar un método de pago.', 'error');
+    return false;
+}
+
+
+$("#btnRegresarFc").click(function () {
+    resetFormularioFacturaCompra();
+    ComponenteFacturaCompra.contenedorTabla.show();
+    ComponenteFacturaCompra.contenedorFormulario.hide();
+});
+
+function resetFormularioFacturaCompra() {
+    // Limpiar la tabla
+    $('#tablaFacturaCompraProductos tbody').empty();
+
+    // Limpiar selectpicker de productos
+    $('#productoSelectFC').find('option').not('[value=""]').remove();
+    $('#productoSelectFC').selectpicker('refresh');
+
+    // Limpiar selectpicker de proeedores
+    $('#ProveedorSelectPickFC').find('option').not('[value=""]').remove();
+    $('#ProveedorSelectPickFC').selectpicker('refresh');
+
+    // Restablecer los campos de total, impuesto y subtotal
+    $('#subtotalFc').val(0.00.toFixed(2));
+    $('#ImpuestoFc').val(0.00.toFixed(2));
+    $('#TotalFc').val(0.00.toFixed(2));
+
+    // Desmarcar los checkboxes de métodos de pago
+    $('#checkEfectivoFc').prop('checked', false);
+    $('#checkTarjetaFc').prop('checked', false);
+}

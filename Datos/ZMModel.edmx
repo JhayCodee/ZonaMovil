@@ -99,6 +99,9 @@
           <Property Name="FechaEntrega" Type="datetime" />
           <Property Name="IdCliente" Type="int" />
           <Property Name="Activo" Type="bit" />
+          <Property Name="Impuesto" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Total" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="TipoPago" Type="nvarchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="Producto">
           <Key>
@@ -480,6 +483,9 @@
           <Property Name="Activo" Type="Boolean" />
           <NavigationProperty Name="Cliente" Relationship="Self.FK_PedidoVenta_Cliente" FromRole="PedidoVenta" ToRole="Cliente" />
           <NavigationProperty Name="DetallePedidoVenta" Relationship="Self.FK_DetallePedidoVenta_PedidoVenta" FromRole="PedidoVenta" ToRole="DetallePedidoVenta" />
+          <Property Name="Impuesto" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Total" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="TipoPago" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Producto">
           <Key>
@@ -913,6 +919,9 @@
           <EntitySetMapping Name="PedidoVenta">
             <EntityTypeMapping TypeName="Contexto.PedidoVenta">
               <MappingFragment StoreEntitySet="PedidoVenta">
+                <ScalarProperty Name="TipoPago" ColumnName="TipoPago" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Impuesto" ColumnName="Impuesto" />
                 <ScalarProperty Name="IdPedidoVenta" ColumnName="IdPedidoVenta" />
                 <ScalarProperty Name="NumeroPedido" ColumnName="NumeroPedido" />
                 <ScalarProperty Name="FechaPedido" ColumnName="FechaPedido" />

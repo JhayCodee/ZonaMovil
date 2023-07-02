@@ -13,7 +13,7 @@
         </div>
         <div class="card-body ">
             <div class="table-responsive">
-                <table class="table table-bordered" id="tablaFacturaCompra" width="100%" cellspacing="0">
+                <table class="table table-bordered table-striped" id="tablaFacturaCompra" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th>NumeroFactura</th>
@@ -122,17 +122,16 @@
 
             <input type="hidden" id="IdFacturaCompra" value="" />
 
-            <div class="col-sm-12 col-md-8">
+            <div class="col-sm-12 col-md-9">
 
                 <div class="col-sm-12">
                     <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Informacion del Proveedor</h6>
+                        <div class="card-header py-3 bg-primary">
+                            <h6 class="m-0 font-weight-bold text-white">Informacion del Proveedor</h6>
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="form-group col-6">
-                                    <label for="ProveedorSelectPickFC">Proveedor</label>
+                                <div class="form-group col-9">
                                     <select class="form-control selectpicker dropdown-menu-down" id="ProveedorSelectPickFC" data-live-search="true" data-placement="bottom" name="ProveedorSelectPickFC">
                                         <option value="">Seleccionar Proveedor</option>
                                     </select>
@@ -144,22 +143,17 @@
 
                 <div class="col-sm-12">
                     <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Productos</h6>
+                        <div class="card-header py-3 bg-primary">
+                            <h6 class="m-0 font-weight-bold text-white">Productos</h6>
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="form-group col-6">
-                                    <label for="productoSelectFC">Seleccione un producto</label>
+                                <div class="form-group col-9">
                                     <select class="form-control selectpicker dropdown-menu-down" id="productoSelectFC" data-live-search="true" data-placement="bottom" name="productoSelectFC">
                                         <option value="">Seleccionar Producto</option>
                                     </select>
                                 </div>
-                                <div class="form-group col-2">
-                                    <label for="cantidadProdFc">Cantidad</label>
-                                    <input type="number" class="form-control" id="cantidadProdFc" name="cantidadProdFc" min="1">
-                                </div>
-                                <div class="form-group col-4 d-flex align-items-end">
+                                <div class="form-group col-3 d-flex align-items-end">
                                     <button type="button" class="btn btn-info" id="addProductoFC">Agregar</button>
                                 </div>
                             </div>
@@ -169,7 +163,9 @@
                                         <tr>
                                             <th>Producto</th>
                                             <th>Modelo</th>
-                                            <th>PrecioVenta</th>
+                                            <th>RAM</th>
+                                            <th>Almacenamiento</th>
+                                            <th>PrecioCompra</th>
                                             <th>Cantidad</th>
                                             <th>Accion</th>
                                         </tr>
@@ -184,12 +180,12 @@
                 </div>
             </div>
 
-            <div class="col-sm-12 col-md-4">
+            <div class="col-sm-12 col-md-3">
 
                 <div class="col-sm-12">
                     <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Facturar</h6>
+                        <div class="card-header py-3 bg-primary">
+                            <h6 class="m-0 font-weight-bold text-white">Facturar</h6>
                         </div>
                         <div class="card-body">
 

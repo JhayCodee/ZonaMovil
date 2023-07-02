@@ -26,6 +26,9 @@ namespace Datos
         public Nullable<System.DateTime> FechaEntrega { get; set; }
         public Nullable<int> IdCliente { get; set; }
         public Nullable<bool> Activo { get; set; }
+        public Nullable<decimal> Impuesto { get; set; }
+        public Nullable<decimal> Total { get; set; }
+        public string TipoPago { get; set; }
     
         public virtual Cliente Cliente { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

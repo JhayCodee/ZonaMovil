@@ -85,6 +85,50 @@ namespace Logica.Compras
             }
         }
 
+
+        public bool EliminarFactura(int id, ref string errroMessgae)
+        {
+            try
+            {
+                var fact = _db.FacturaCompra.FirstOrDefault(x => x.IdFacturaCompra == id);
+
+                if (fact != null)
+                {
+                    fact.Activo = false;
+                    _db.Entry(fact).State = EntityState.Modified;
+                    _db.SaveChanges();
+
+                    // Obtener los detalles de la factura
+                    var detallesFactura = _db.DetalleFacturaCompra.Where(x => x.IdFacturaCompra == id).ToList();
+
+                    // Devolver los productos al stock
+                    foreach (var detalleFactura in detallesFactura)
+                    {
+                        var producto = _db.Producto.Find(detalleFactura.IdProducto);
+                        if (producto != null)
+                        {
+                            producto.Stock -= detalleFactura.Cantidad;
+                            _db.Entry(producto).State = EntityState.Modified;
+                        }
+                    }
+
+                    _db.SaveChanges();
+                }
+                else
+                {
+                    errroMessgae = "Factura no encontrada";
+                    return false;
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                errroMessgae = ex.Message;
+                return false;
+            }
+        }
+
         #endregion
 
         #region consultas

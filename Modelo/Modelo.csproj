@@ -49,6 +49,7 @@
     <Compile Include="FacturaCompra_VM.cs" />
     <Compile Include="FacturaVenta_VM.cs" />
     <Compile Include="Marca_VM.cs" />
+    <Compile Include="Pedidos_VM.cs" />
     <Compile Include="ProcedimientosAlmacenados\DetalleFacturaVenta_VM.cs" />
     <Compile Include="ProcedimientosAlmacenados\InfoFacturaVenta_VM.cs" />
     <Compile Include="ProcedimientosAlmacenados\ObtenerDetalleProducto_VM.cs" />

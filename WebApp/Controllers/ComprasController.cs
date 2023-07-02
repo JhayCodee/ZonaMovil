@@ -18,29 +18,6 @@ namespace WebApp.Controllers
             ln = new FacturaCompra_LN();
         }
 
-        public ActionResult ImprimirFacturaCompra(int numeroFactura)
-        {
-            return new ActionAsPdf("FacturaVentaTemplate", new { numeroFactura = numeroFactura })
-            { FileName = $"Factura-{numeroFactura}.pdf" };
-        }
-
-        //public ActionResult FacturaVentaTemplate(int numeroFactura)
-        //{
-        //    ImprimirFactura_VM f = new ImprimirFactura_VM();
-        //    string errorMessage = string.Empty;
-
-        //    if (new ReporteVentas_LN().ImprimirFactura(numeroFactura, ref errorMessage, ref f))
-        //    {
-        //        return View(f);
-        //    }
-        //    else
-        //    {
-        //        return View();
-        //    }
-        //}
-
-
-
         // GET: Compras
         public ActionResult Index()
         {
@@ -66,6 +43,24 @@ namespace WebApp.Controllers
             }
 
         }
+
+        [HttpPost]
+        public JsonResult EliminarFacturaCompra(int id)
+        {
+            string errorMessage = string.Empty;
+
+            bool res = ln.EliminarFactura(id, ref errorMessage);
+
+            if (res)
+            {
+                return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { success = false, errorMessage = errorMessage }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
 
 
         [HttpGet]

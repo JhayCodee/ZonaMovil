@@ -471,24 +471,6 @@ function cargarTablaFacturaVenta() {
                             modo = "crear"
                         }
                     },
-                    {
-                        extend: 'excel',
-                        text: 'Exportar a Excel',
-                        className: 'btn btn-success mb-2',
-                        titleAttr: "Exportar a Excel"
-                    },
-                    {
-                        extend: 'csv',
-                        text: 'Exportar a CSV',
-                        className: 'btn btn-warning mb-2',
-                        titleAttr: "Exportar a CSV"
-                    },
-                    {
-                        extend: 'print',
-                        text: 'Imprimir',
-                        className: 'btn btn-info mb-2',
-                        titleAttr: "Imprimir"
-                    },
                 ]
             });
         },
@@ -529,7 +511,6 @@ function resetFormularioFacturaVenta() {
     $('#checkTarjetaFV').prop('checked', false);
 }
 
-// Verificar que se ha seleccionado un cliente
 function verificarClienteSeleccionado() {
     var clienteId = $('#clienteSelectFV').val();
     if (clienteId === '') {
@@ -539,7 +520,6 @@ function verificarClienteSeleccionado() {
     return true;
 }
 
-// Verificar que la lista de productos no está vacía
 function verificarListaProductos() {
     var numProductos = $('#tablaFacturaVentaProductos tbody tr').length;
     if (numProductos === 0) {

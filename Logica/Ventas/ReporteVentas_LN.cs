@@ -95,5 +95,59 @@ namespace Logica.Ventas
             }
         }
 
+
+        #region Pedidos
+
+        public bool Imprimirpedido(int numeroFactura, ref string errorMessage, ref ImprimirFactura_VM factura)
+        {
+            try
+            {
+                factura = _db.PedidoVenta
+                    .Where(p => p.NumeroPedido == numeroFactura)
+                    .Select(p => new ImprimirFactura_VM
+                    {
+                        IdFacturaVenta = p.IdPedidoVenta,
+                        NumeroFactura = p.NumeroPedido,
+                        FechaPedido = p.FechaPedido,
+                        FechaEntrega = p.FechaEntrega,
+                        Impuesto = p.Impuesto,
+                        Total = p.Total,
+                        Cliente = p.Cliente.Nombres + " " + p.Cliente.Apellidos,
+                        Cedula = p.Cliente.Cedula,
+
+                        listaProducto = _db.DetallePedidoVenta
+                            .Where(d => d.IdPedidoVenta == p.IdPedidoVenta)
+                            .Select(d => new DetalleFVImprimir
+                            {
+                                Producto = d.Producto.Nombre,
+                                Cantidad = d.Cantidad,
+                                Precio = d.Producto.PrecioVenta,
+                                Modelo = d.Producto.Modelo,
+                                Almacenamiento = (int?)d.Producto.Almacenamiento,
+                                RAM = d.Producto.RAM,
+                                Color = d.Producto.Color,
+                                Garantia = d.Producto.GarantiaEnMeses
+                            }).ToList()
+                    }).FirstOrDefault();
+
+                if (factura != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    errorMessage = "No se encontró el pedido con el número: " + numeroFactura;
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                errorMessage = ex.Message;
+                return false;
+            }
+        }
+
+        #endregion
+
     }
 }

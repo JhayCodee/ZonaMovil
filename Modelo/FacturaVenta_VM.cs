@@ -31,6 +31,11 @@ namespace Modelo
 
         public List<DetalleFVImprimir> listaProducto { get; set; }
         public string Cliente { get; set; }
+
+        public Nullable<System.DateTime> FechaPedido { get; set; }
+        public Nullable<System.DateTime> FechaEntrega { get; set; }
+        public string Direccion { get; set; }
+
     }
 
     public class DetalleFVImprimir 
