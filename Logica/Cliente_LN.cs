@@ -160,5 +160,20 @@ namespace Logica
                 return null;
             }
         }
+
+        public bool ValidarCedula(string cedula)
+        {
+            try
+            {
+                var cliente = _db.Cliente.FirstOrDefault(c => c.Cedula == cedula);
+                return cliente != null;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al validar la cédula: " + ex.Message);
+                return false;
+            }
+        }
+
     }
 }

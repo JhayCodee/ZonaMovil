@@ -99,5 +99,19 @@ namespace WebApp.Controllers
                 return Json(new { success = false, message = mensaje });
             }
         }
+
+        [HttpPost]
+        public ActionResult ValidarCedulaAjax(string cedula)
+        {
+            // Llama al método de la capa lógica para validar la cédula
+            bool esValida = clienteLN.ValidarCedula(cedula);
+
+            // Crea un objeto anónimo con la respuesta
+            var respuesta = new { esValida = esValida };
+
+            // Devuelve la respuesta como JSON
+            return Json(respuesta, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

@@ -235,6 +235,7 @@ $(function () {
                             action: function (e, dt, node, config) {
                                 $('#FormularioCliente')[0].reset();
                                 modo = "crear";
+                                $('#IdCliente').val('');
                                 vistaClienteComponente.contenedorTabla.hide();
                                 vistaClienteComponente.contenedorFormulario.show();
                             }
@@ -255,5 +256,6 @@ $(function () {
         $("#FormularioCliente").find(".is-valid").removeClass("is-valid");
         vistaClienteComponente.contenedorTabla.show();
         vistaClienteComponente.contenedorFormulario.hide();
+        $('#FormularioCliente')[0].reset();
     });
 });

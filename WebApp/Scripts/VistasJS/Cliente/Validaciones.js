@@ -23,6 +23,44 @@
                 cedulaFormato: true,
                 minlength: 16,
                 maxlength: 16,
+                remote: function () {
+                    var idCliente = $("#IdCliente").val();
+                    if (idCliente === '') { // solo aplicar validación remota si IdCliente está vacío
+                        return {
+                            url: "/Cliente/ValidarCedulaAjax",
+                            type: "POST",
+                            data: {
+                                cedula: function () {
+                                    return $("#CedulaCliente").val();
+                                }
+                            },
+                            dataFilter: function (response) {
+                                // Manejo personalizado de la respuesta JSON
+                                var jsonResponse = JSON.parse(response);
+                                if (jsonResponse.esValida) {
+                                    // La cédula existe en la base de datos
+                                    return "false";
+                                } else {
+                                    // La cédula no existe en la base de datos
+                                    return "true";
+                                }
+                            }
+                        }
+                    } else {
+                        return { // devolver un objeto que simula una llamada ajax exitosa
+                            url: "#",
+                            type: "POST",
+                            data: {
+                                dummy: function () {
+                                    return "";
+                                }
+                            },
+                            dataFilter: function (response) {
+                                return "true"; // simula siempre una respuesta exitosa
+                            }
+                        };
+                    }
+                }
             },
             Correo: {
                 required: true,
@@ -45,6 +83,7 @@
                 cedulaFormato: "Por favor ingrese una cédula válida en formato 000-000000-0000A.",
                 minlength: "La cédula debe contener 16 caracteres",
                 maxlength: "La cédula debe contener 16 caracteres",
+                remote: "La cédula ya está registrada",
             },
             Correo: {
                 required: "Este campo es requerido",

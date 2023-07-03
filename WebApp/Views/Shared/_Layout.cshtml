@@ -42,11 +42,11 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="@Url.Action("Index","Home")">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-phone-volume fa-flip-horizontal"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Zona Movil</div>
+                <div class="sidebar-brand-text mx-3">Zona Mobile</div>
 
             </a>
 
@@ -169,7 +169,10 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">@user.Nombres</span>
+                                @if (user != null)
+                                {
+                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">@user.Nombres</span>
+                                }
                                 <img class="img-profile rounded-circle" src="~/Content/img/usericon.png">
                             </a>
                             <!-- Dropdown - User Information -->
