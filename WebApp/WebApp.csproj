@@ -156,6 +156,7 @@
     <Content Include="Content\img\undraw_profile_2.svg" />
     <Content Include="Content\img\undraw_profile_3.svg" />
     <Content Include="Content\img\undraw_rocket.svg" />
+    <Content Include="Content\img\usericon.png" />
     <Content Include="Content\img\wave.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -2062,6 +2063,7 @@
     <Content Include="Views\Home\SinPermiso.cshtml" />
     <Content Include="Views\Pedidos\Index.cshtml" />
     <Content Include="Views\Pedidos\PedidoVentaFactura.cshtml" />
+    <Content Include="Views\ReporteVentas\ReporteVenta.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Logica\Logica.csproj">

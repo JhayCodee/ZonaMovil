@@ -6,9 +6,12 @@ using System.Web.Mvc;
 using Logica;
 using Modelo;
 using Modelo.ProcedimientosAlmacenados;
+using WebApp.Permisos;
 
 namespace WebApp.Controllers
 {
+    [Authorize]
+
     public class ProductoController : Controller
     {
         private readonly Producto_LN ProductoLN;
@@ -17,6 +20,8 @@ namespace WebApp.Controllers
         {
             ProductoLN = new Producto_LN();
         }
+
+        [PermisoRol(Modelo.Seguridad.Rol_EN.Administrador)]
 
         // GET: Producto
         public ActionResult Index()

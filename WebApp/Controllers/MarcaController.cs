@@ -5,9 +5,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebApp.Permisos;
 
 namespace WebApp.Controllers
 {
+
+    [Authorize]
+    [PermisoRol(Modelo.Seguridad.Rol_EN.Administrador)]
     public class MarcaController : Controller
     {
         private readonly Marca_LN marcaLN;

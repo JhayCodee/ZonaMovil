@@ -51,4 +51,18 @@ namespace Modelo
 
     }
 
+    public class spReporteVentas_VM
+    {
+        public string Nombreproducto { get; set; }
+        public string Marcaproducto { get; set; }
+        public string Modeloproducto { get; set; }
+        public Nullable<int> RAM { get; set; }
+        public Nullable<int> Almacenamiento { get; set; }
+        public string Color { get; set; }
+        public Nullable<int> Cantidadvendida { get; set; }
+        public Nullable<decimal> PrecioVenta { get; set; }
+        public Nullable<decimal> Total { get; set; }
+        public Nullable<int> Numerofacturas { get; set; }
+    }
+
 }

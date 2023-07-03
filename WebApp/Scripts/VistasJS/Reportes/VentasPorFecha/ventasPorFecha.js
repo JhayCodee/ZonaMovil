@@ -8,10 +8,13 @@ ComponenteVentasPorFecha = {
 
 // buttons 
 
+var startDate;
+var endDate;
+
 $('#btnBuscarRangoFecha').click(function () {
     var dateRange = $('input[name="VentasPorFechasDTP"]').data('daterangepicker');
-    var startDate = dateRange.startDate.format('YYYY-MM-DD');
-    var endDate = dateRange.endDate.format('YYYY-MM-DD');
+    startDate = dateRange.startDate.format('YYYY-MM-DD');
+    endDate = dateRange.endDate.format('YYYY-MM-DD');
 
     cargarTablaVentasPorFecha(startDate, endDate);
 });
@@ -70,42 +73,55 @@ function cargarTablaVentasPorFecha(f1, f2) {
             data.data.forEach(function (row) {
                 row.Fecha = new Date(parseInt(row.Fecha.substr(6)));
             });
+
             $("#tablaVentasPorFechas").DataTable({
                 // Configuración de la DataTable
-                "data": data.data,
+                dom: "<'row'<'col-md-12'B>>" + "<'row'<'col-md-6'l><'col-md-6'f>>" + "<'row'<'col-md-12'tr>>" + "<'row'<'col-md-5'i><'col-md-7'p>>",
+                data: data.data,
                 lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "TODOS"]],
                 pageLength: 10,
                 // Columnas y renderizado personalizado
-                "columns": [
-                    { "data": "NumeroFactura" },
-                    { "data": "Cliente" },
+                columns: [
+                    { data: "NumeroFactura" },
+                    { data: "Cliente" },
                     {
-                        "data": "Fecha",
-                        "render": function (data, type, row, meta) {
+                        data: "Fecha",
+                        render: function (data, type, row, meta) {
                             var fechaFormateada = moment(data).format("DD/MM/YYYY");
                             return fechaFormateada;
                         }
                     },
-                    { "data": "Impuesto" },
-                    { "data": "Total" },
+                    { data: "Impuesto" },
+                    { data: "Total" },
                     {
-                        "data": "Activo",
-                        "render": function (data, type, row, meta) {
-                            return (row.Activo) ? '<span class="badge badge-success">Activa</span>' : '<span class="badge badge-danger">Anulada</span>' ;
+                        data: "Activo",
+                        render: function (data, type, row, meta) {
+                            return (row.Activo) ? '<span class="badge badge-success">Activa</span>' : '<span class="badge badge-danger">Anulada</span>';
                         }
                     },
                     {
-                        "data": null,
-                        "render": function (data, type, row, meta) {
+                        data: null,
+                        render: function (data, type, row, meta) {
                             return '<div class="centrar" style="display:flex; justify-content:center; gap:6px;">' +
                                 '<button type="button" class="btn btn-info btnVer" data-id="' + row.NumeroFactura + '"> <i class="fas fa-solid fa-eye"></i> </button>' +
-                                '<button type="button" class="btn btn-secondary btnEliminar" data-id="' + row.IdFacturaVenta + '"> <i class="fas fa-solid fa-print"></i> </button>' +
                                 '</div>';
                         }
                     }
                 ],
-                "columnDefs": [
-                    { "type": "datetime-moment", "targets": 2 }
+                columnDefs: [
+                    { type: "datetime-moment", targets: 2 }
+                ],
+                buttons: [
+                    {
+                        text: 'Generar Reporte',
+                        className: 'btn btn-info mb-2',
+                        action: function (e, dt, node, config) {
+                            window.location.href = '/ReporteVentas/print?f1=' + startDate + '&f2=' + endDate;
+                        },
+                        attr: {
+                            id: 'btnGenerarReporte'
+                        }
+                    },
                 ]
             });
         },

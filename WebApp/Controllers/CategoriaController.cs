@@ -5,9 +5,12 @@ using System.Web;
 using System.Web.Mvc;
 using Logica;
 using Modelo;
+using WebApp.Permisos;
 
 namespace WebApp.Controllers
 {
+    [Authorize]
+    [PermisoRol(Modelo.Seguridad.Rol_EN.Administrador)]
     public class CategoriaController : Controller
     {
         private readonly Categoria_LN categoriaLN;

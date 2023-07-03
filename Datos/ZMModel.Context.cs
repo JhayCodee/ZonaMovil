@@ -98,5 +98,18 @@ namespace Datos
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spDetalleFacturaVenta_Result>("spDetalleFacturaVenta1", nfParameter);
         }
+    
+        public virtual ObjectResult<spReporteVentas_Result> spReporteVentas(Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFin)
+        {
+            var fechaInicioParameter = fechaInicio.HasValue ?
+                new ObjectParameter("FechaInicio", fechaInicio) :
+                new ObjectParameter("FechaInicio", typeof(System.DateTime));
+    
+            var fechaFinParameter = fechaFin.HasValue ?
+                new ObjectParameter("FechaFin", fechaFin) :
+                new ObjectParameter("FechaFin", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spReporteVentas_Result>("spReporteVentas", fechaInicioParameter, fechaFinParameter);
+        }
     }
 }

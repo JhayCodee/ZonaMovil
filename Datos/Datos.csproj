@@ -100,6 +100,9 @@
     <Compile Include="spObtenerDetalleProducto_Result.cs">
       <DependentUpon>ZMModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="spReporteVentas_Result.cs">
+      <DependentUpon>ZMModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Usuario.cs">
       <DependentUpon>ZMModel.tt</DependentUpon>
     </Compile>

@@ -1,4 +1,11 @@
-﻿<!DOCTYPE html>
+﻿@using Modelo.Seguridad
+
+@{
+    var user = Session["Usuario"] as Usuarios_VM;
+    var isUserAdmin = user != null && user.IdRol == Rol_EN.Administrador;
+}
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -50,7 +57,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="@Url.Action("Index","Home")">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span>
+                    <span>Inicio</span>
                 </a>
             </li>
 
@@ -73,22 +80,29 @@
                 <div id="collapseInventory" class="collapse" aria-labelledby="headingUtilities"
                      data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="@Url.Action("Index","Producto")">Productos</a>
+                        @if (isUserAdmin)
+                        {
+                            <a class="collapse-item" href="@Url.Action("Index","Producto")">Productos</a>
+                        }
                         <a class="collapse-item" href="@Url.Action("Index","Cliente")">Cliente</a>
-                        <a class="collapse-item" href="@Url.Action("Index","Proveedor")">Proveedor</a>
-                        <a class="collapse-item" href="@Url.Action("Index","Categoria")">Categoria</a>
-                        <a class="collapse-item" href="@Url.Action("Index","Marca")">Marca</a>
+                        @if (isUserAdmin)
+                        {
+                            <a class="collapse-item" href="@Url.Action("Index","Proveedor")">Proveedor</a>
+                            <a class="collapse-item" href="@Url.Action("Index","Categoria")">Categoria</a>
+                            <a class="collapse-item" href="@Url.Action("Index","Marca")">Marca</a>
+                        }
                     </div>
                 </div>
             </li>
+
 
             <li class="nav-item">
                 <a class="nav-link" href="@Url.Action("Index","Ventas")">
                     <i class="fas fa-fw fa-dollar-sign"></i>
                     <span>Ventas</span>
                 </a>
-            </li> 
-            
+            </li>
+
             <li class="nav-item">
                 <a class="nav-link" href="@Url.Action("Index","Pedidos")">
                     <i class="fas fa-fw fa-truck"></i>
@@ -96,27 +110,34 @@
                 </a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="@Url.Action("Index","Compras")">
-                    <i class="fas fa-fw fa-shopping-cart"></i>
-                    <span>Compras</span>
-                </a>
-            </li>
+            @if (isUserAdmin)
+            {
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Index","Compras")">
+                        <i class="fas fa-fw fa-shopping-cart"></i>
+                        <span>Compras</span>
+                    </a>
+                </li>
+            }
 
-            <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSales"
-                   aria-expanded="true" aria-controls="collapseSales">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Reportes</span>
-                </a>
-                <div id="collapseSales" class="collapse" aria-labelledby="headingSales"
-                     data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="@Url.Action("VentasFecha","ReporteVentas")">Ventas por Fechas</a>
+            @if (isUserAdmin)
+            {
+                <!-- Nav Item - Utilities Collapse Menu -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSales"
+                       aria-expanded="true" aria-controls="collapseSales">
+                        <i class="fas fa-fw fa-wrench"></i>
+                        <span>Reportes</span>
+                    </a>
+                    <div id="collapseSales" class="collapse" aria-labelledby="headingSales"
+                         data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item" href="@Url.Action("VentasFecha","ReporteVentas")">Ventas por Fechas</a>
+                        </div>
                     </div>
-                </div>
-            </li>
+                </li>
+            }
+
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -148,33 +169,20 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Ben Reilly</span>
-                                <img class="img-profile rounded-circle" src="https://th.bing.com/th/id/OIP.v9DMy6jcnhUaRixvWb7OWQHaLP?pid=ImgDet&rs=1">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">@user.Nombres</span>
+                                <img class="img-profile rounded-circle" src="~/Content/img/usericon.png">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                  aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
-                                </a>
-                                <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="@Url.Action("Logout","Home")">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
+                                    Cerrar sesión
                                 </a>
                             </div>
                         </li>
                     </ul>
-                    
+
 
 
                     <!-- Topbar Navbar -->

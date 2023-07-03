@@ -6,9 +6,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebApp.Permisos;
+
 
 namespace WebApp.Controllers
 {
+    [Authorize]
+    [PermisoRol(Modelo.Seguridad.Rol_EN.Administrador)]
     public class ComprasController : Controller
     {
         private readonly FacturaCompra_LN ln;

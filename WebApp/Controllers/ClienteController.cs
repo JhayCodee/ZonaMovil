@@ -8,6 +8,7 @@ using Modelo;
 
 namespace WebApp.Controllers
 {
+    [Authorize]
     public class ClienteController : Controller
     {
         private readonly Cliente_LN clienteLN;

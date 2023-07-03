@@ -11,6 +11,8 @@ using WebApp.Permisos;
 namespace WebApp.Controllers
 {
     [Authorize]
+    [PermisoRol(Modelo.Seguridad.Rol_EN.Administrador)]
+
     public class ProveedorController : Controller
     {
         private readonly Proveedor_LN proveedorLN;
@@ -20,7 +22,6 @@ namespace WebApp.Controllers
             proveedorLN = new Proveedor_LN();
         }
 
-        [PermisoRol(Modelo.Seguridad.Rol_EN.Administrador)]
         public ActionResult Index()
         {
             return View();

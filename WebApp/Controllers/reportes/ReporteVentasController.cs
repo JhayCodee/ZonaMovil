@@ -1,4 +1,5 @@
 ﻿using Logica.Ventas;
+using Modelo;
 using Modelo.ProcedimientosAlmacenados;
 using Rotativa;
 using System;
@@ -7,8 +8,13 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+using WebApp.Permisos;
+
 namespace WebApp.Controllers.reportes
 {
+    [Authorize]
+    [PermisoRol(Modelo.Seguridad.Rol_EN.Administrador)]
+
     public class ReporteVentasController : Controller
     {
         private readonly ReporteVentas_LN ln;
@@ -45,6 +51,29 @@ namespace WebApp.Controllers.reportes
             return View(lista);
         }
 
+
+        public ActionResult print(DateTime f1, DateTime f2)
+        {
+            return new ActionAsPdf("ReporteVenta", new { inicio = f1, fin = f2 })
+            { FileName = $"Reporte.pdf" };
+        }
+
+        public ActionResult ReporteVenta(DateTime inicio, DateTime fin)
+        {
+            List<spReporteVentas_VM> lista = new List<spReporteVentas_VM>();
+
+            if (new ReporteVentas_LN().ObtenerReporteVentas(ref lista, inicio, fin))
+            {
+                ViewBag.Periodo = inicio.ToString("dd/MM/yyyy") + " - " + fin.ToString("dd/MM/yyyy");
+                return View(lista);
+            }
+            else
+            {
+                return View();
+            }
+        }
+
+
         #endregion
 
 
@@ -58,6 +87,7 @@ namespace WebApp.Controllers.reportes
 
             return Json(new { data = lista }, JsonRequestBehavior.AllowGet);
         }
+
         #endregion
 
 

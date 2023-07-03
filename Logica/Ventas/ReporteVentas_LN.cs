@@ -18,6 +18,8 @@ namespace Logica.Ventas
             _db = new db_a97d9e_zonamovilEntities();
         }
 
+
+        #region Ventas
         public bool FacturaPorRangoFecha(ref List<spBuscarFacturaVentaPorRangoFechas_VM> lista, DateTime f1, DateTime f2)
         {
             try
@@ -71,7 +73,7 @@ namespace Logica.Ventas
                                     Modelo = d.Producto.Modelo,
                                     Almacenamiento = (int?)d.Producto.Almacenamiento,
                                     RAM = d.Producto.RAM,
-                                    Color = d.Producto.Color, 
+                                    Color = d.Producto.Color,
                                     Garantia = d.Producto.GarantiaEnMeses
                                 }).ToList()
 
@@ -94,6 +96,36 @@ namespace Logica.Ventas
                 return false;
             }
         }
+
+        public bool ObtenerReporteVentas(ref List<spReporteVentas_VM> lista, DateTime fechaInicio, DateTime fechaFin)
+        {
+            try
+            {
+                lista = _db.spReporteVentas(fechaInicio, fechaFin)
+                    .Select(x => new spReporteVentas_VM
+                    {
+                        Nombreproducto = x.Nombreproducto,
+                        Marcaproducto = x.Marcaproducto,
+                        Modeloproducto = x.Modeloproducto,
+                        RAM = x.RAM,
+                        Almacenamiento = x.Almacenamiento,
+                        Color = x.Color,
+                        Cantidadvendida = x.Cantidadvendida,
+                        PrecioVenta = x.PrecioVenta,
+                        Total = x.Total,
+                        Numerofacturas = x.Numerofacturas
+                    })
+                    .ToList();
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        #endregion
 
 
         #region Pedidos

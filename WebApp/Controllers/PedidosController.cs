@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace WebApp.Controllers
 {
+    [Authorize]
     public class PedidosController : Controller
     {
         private readonly Pedido_LN ln;

@@ -306,6 +306,10 @@
         <Function Name="spObtenerDetalleProducto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdProducto" Type="int" Mode="In" />
         </Function>
+        <Function Name="spReporteVentas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FechaInicio" Type="date" Mode="In" />
+          <Parameter Name="FechaFin" Type="date" Mode="In" />
+        </Function>
         <EntityContainer Name="ContextoStoreContainer">
           <EntitySet Name="Categoria" EntityType="Self.Categoria" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
@@ -735,6 +739,10 @@
             <End Role="Rol" EntitySet="Rol" />
             <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
+          <FunctionImport Name="spReporteVentas" ReturnType="Collection(Contexto.spReporteVentas_Result)">
+            <Parameter Name="FechaInicio" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaFin" Mode="In" Type="DateTime" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="spObtenerDetalleProducto_Result">
           <Property Type="Int32" Name="IdProducto" Nullable="false" />
@@ -818,6 +826,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="spReporteVentas_Result">
+          <Property Type="String" Name="Nombreproducto" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Marcaproducto" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Modeloproducto" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="RAM" Nullable="true" />
+          <Property Type="Int32" Name="Almacenamiento" Nullable="true" />
+          <Property Type="String" Name="Color" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Cantidadvendida" Nullable="true" />
+          <Property Type="Decimal" Name="PrecioVenta" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="Total" Nullable="true" Precision="19" />
+          <Property Type="Int32" Name="Numerofacturas" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1079,6 +1099,22 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spReporteVentas" FunctionName="Contexto.Store.spReporteVentas">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Contexto.spReporteVentas_Result">
+                <ScalarProperty Name="Nombreproducto" ColumnName="Nombreproducto" />
+                <ScalarProperty Name="Marcaproducto" ColumnName="Marcaproducto" />
+                <ScalarProperty Name="Modeloproducto" ColumnName="Modeloproducto" />
+                <ScalarProperty Name="RAM" ColumnName="RAM" />
+                <ScalarProperty Name="Almacenamiento" ColumnName="Almacenamiento" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Cantidadvendida" ColumnName="Cantidadvendida" />
+                <ScalarProperty Name="PrecioVenta" ColumnName="PrecioVenta" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Numerofacturas" ColumnName="Numerofacturas" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
